@@ -3,10 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>EventHive</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .navbar {
+            background-color: rgb(198, 250, 253) !important; /* Transparent background */
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: rgb(141, 244, 239);
+            padding: 8px;
+            border-radius: 50px;
+            gap: 10px;
+        }
+        .search-container input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: rgb(31, 152, 239);
+            padding: 5px 10px;
+        }
+        .search-container .search-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(134, 134, 134, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+        .search-container .search-icon i {
+            color: rgb(52, 140, 222);
+            font-size: 18px;
+        }
+        .navbar-nav .nav-item {
+            margin-left: 15px;
+        
+        }
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .nav-link{
+            color: black;
+        }
+    </style>
 </head>
 <body>
-    <h1>there is a navbar</h1>
-    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" style="color: black;" href="#">
+                <i class="fa-solid fa-calendar-check me-2"></i> EventHive
+            </a>
+            
+            <div class="search-container mx-auto">
+                <input type="search" placeholder="Search Events" aria-label="Search">
+                <span>|</span>
+                <input type="search" placeholder="Search Locations" aria-label="Search">
+                <div class="search-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-calendar-days me-1"></i> Events</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="galleryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-photo-film me-1"></i> Gallery
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="galleryDropdown">
+                            <li><a class="dropdown-item" href="#">Photos</a></li>
+                            <li><a class="dropdown-item" href="#">Videos</a></li>
+                            <li><a class="dropdown-item" href="#">Shorts</a></li>
+                            <li><a class="dropdown-item" href="#">Concerts</a></li>
+                            <li><a class="dropdown-item" href="#">Clubs</a></li>
+                            <li><a class="dropdown-item" href="#">Fests</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-info logout-btn" href="#">
+                            <i class="fa-solid fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
