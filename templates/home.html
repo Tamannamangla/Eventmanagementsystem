@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventHive - Your Ultimate Event Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
+</head>
+
+<body>
+    {% extends "base.html" %}
+
+    {% block content %}
+
+    <section class="hero">
+        <div class="hero-content">
+            <ul class="navbar-nav ms-auto">
+                {% if username %}
+                    <h1>Welcome, {{ username }}</h1>
+                
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Index</a></li>
+                    
+                {% endif %}
+            </ul>
+            <p>Your ultimate event experience starts here!</p>
+            <a href="#featured-events" class="btn btn-primary btn-lg">Explore Events</a>
+        </div>
+    </section>
+
+    <section class="countdown-section">
+        <h2>⏳ Upcoming Mega Event: <span id="event-name">Tech Summit 2025</span></h2>
+        <div id="countdown"></div>
+    </section>
+
+    <section class="trending-events">
+        <h2>🔥 Trending Events</h2>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="event-card1 event-card"></div>
+                <div class="event-card2 event-card"></div>
+                <div class="event-card3 event-card"></div>
+                <div class="event-card4 event-card"></div>
+                <div class="event-card5 event-card"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="why-choose-us">
+        <h2>Why Choose Us?</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="../static/images/whychooseus1.jpg" alt="Quality Service">
+                        <div class="card-body">
+                            <h5 class="card-title">High-Quality Event Management</h5>
+                            <p class="card-text">We ensure every detail is perfect for your event.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="../static/images/whychooseus2.jpg" alt="Expert Team">
+                        <div class="card-body">
+                            <h5 class="card-title">Professional and Experienced </h5>
+                            <p class="card-text">We ensure every detail is perfect for your event.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="../static/images/whychooseus3.jpg" alt="Memorable Moments">
+                        <div class="card-body">
+                            <h5 class="card-title">Memorable Experiences</h5>
+                            <p class="card-text">We ensure every detail is perfect for your event.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="testimonials">
+        <h2>What Our Clients Say</h2>
+        <div id="testimonialCarousel" class="event-carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="d-flex justify-content-center gap-4">
+                        <div class="testimonial-card">
+                            <img src="../static/images/client1.jpg" alt="Client Avatar" class="testimonial-avatar">
+                            <p>⭐ ⭐ ⭐ ⭐ ⭐ "Amazing experience!"</p>
+                            <p>- John Doe</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <img src="../static/images/client2.jpg" alt="Client Avatar" class="testimonial-avatar">
+                            <p>⭐ ⭐ ⭐ ⭐ "Loved the events!"</p>
+                            <p>- Sarah Johnson</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <img src="../static/images/client3.jpg" alt="Client Avatar" class="testimonial-avatar">
+                            <p>⭐ ⭐ ⭐ ⭐ ⭐ "Best event management service!"</p>
+                            <p>- Michael Smith</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="d-flex justify-content-center gap-4">
+                        <div class="testimonial-card">
+                            <img src="../static/images/client4.jpg" alt="Client Avatar" class="testimonial-avatar">
+                            <p>⭐ ⭐ ⭐ ⭐ ⭐ "Highly professional and well-organized!"</p>
+                            <p>- Emily Brown</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <img src="../static/images/client5.jpg" alt="Client Avatar" class="testimonial-avatar">
+                            <p>⭐ ⭐ ⭐ ⭐ ⭐ "Exceeded our expectations!"</p>
+                            <p>- Daniel Lee</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <img src="../static/images/client6.jpg" alt="Client Avatar" class="testimonial-avatar">
+                            <p>⭐ ⭐ ⭐ ⭐ "Great support and friendly staff!"</p>
+                            <p>- Olivia Taylor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Carousel Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </section>
+
+
+
+    <section class="featured-events">
+        <h2>Featured Events</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="../static/images/concertbg.png" alt="Event 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Music Festival</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="../static/images/techfestival.jpg" alt="Event 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Tech Conference</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="../static/images/artfestival.jpg" alt="Event 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Art Exhibition</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section>
+        <!-- Section Container -->
+        <div class="section-container">
+            <!-- Left Column - 4 Divs with Image Carousels -->
+            <div class="left-column">
+                <!-- Carousel 1 -->
+                <div class="swiper swiper-1">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="https://eventsmanagementkerala.com/wp-content/uploads/elementor/thumbs/wedding-planner-melodia-blog-image-qxcf1o553spfu4yhuljcvq1vtq5bucgw3xpq12vulo.webp"
+                                alt="Event Management Company Kannur">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://eventsmanagementkerala.com/wp-content/uploads/elementor/thumbs/image-blog-qxci15yoopuxkqtd5kaej3ilh2bh487t7zjqt9i10s.webp"
+                                alt="Best event management company in Kannur">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://eventsmanagementkerala.com/wp-content/uploads/elementor/thumbs/whatsapp-image-latest-qxcfke3f80c12jrjj6uv1hzdqzvi5bsfolgv4h4koc.webp"
+                                alt="Wedding Event Management Company Kannur">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel 2 -->
+                <div class="swiper swiper-2">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="https://eventsmanagementkerala.com/wp-content/uploads/elementor/thumbs/DSC02433-scaled-qxkcuvmqhjuud5b53nxwas04dty8yewtqsd30gz1kc.jpg"
+                                alt="Best event management company in Kannur">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://eventsmanagementkerala.com/wp-content/uploads/elementor/thumbs/ECP01897-scaled-qxkcwg11vm01pr17ycbigdrs0y89s94pyji7t2nf70.jpg"
+                                alt="Wedding Event Management Company">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://eventsmanagementkerala.com/wp-content/uploads/elementor/thumbs/Maritus-Events-Wedding-Planner-trivandrum2-qxdtljg14byy75hv38vyehhs648qpt83ngcrn8jnos.webp"
+                                alt="Best event management company in Kannur">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel 3 -->
+                <div class="swiper swiper-3">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="https://eventsmanagementkerala.com/wp-content/uploads/elementor/thumbs/Vlinton-Greeshma4-04-09_15-21-09-910-scaled-qukm85ef4nwyraqehiing3t7uw1fseliyuiegwuh7w.webp"
+                                alt="wedding planners in Kannur">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://eventsmanagementkerala.com/wp-content/uploads/elementor/thumbs/wedding-planner-blog-main-qxcb1khvd5fxy89uat5d4l4xc6eksteamp8yeyjmi4.webp"
+                                alt="wedding planners in Kannur">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://eventsmanagementkerala.com/wp-content/uploads/elementor/thumbs/stage-wedding-planner-scaled-qxarrlcgizbchotpd4qcv90yugqtxabu18dj733pgs.webp"
+                                alt="Wedding planners in Kannur">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel 4 -->
+                <div class="swiper swiper-4">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="https://eventsmanagementkerala.com/wp-content/uploads/elementor/thumbs/Mayz-24-01-18_14-33-02-277-scaled-1-qvov0n6vng82o0ik6y1y53gqdtbh8x9itix3oxw52k.webp"
+                                alt="Hindu Event Management Company Kerala">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://eventsmanagementkerala.com/wp-content/uploads/elementor/thumbs/Haldi-Aditya-Swati-02-20_18-47-10-097-scaled-qmfxn1t1xjegwhzfxm00pgdds5qrus06dikzx63ang.webp"
+                                alt="event planners in kannur">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://eventsmanagementkerala.com/wp-content/uploads/elementor/thumbs/Mayz-24-01-18_14-15-09-683-scaled-qukn1e5nr3y3yk97q5kt0q5h6fwj9eowbl67ythjn0.webp"
+                                alt="wedding event management company in Kannur">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Text Content -->
+            <div class="right-column">
+                <h2>Your Ultimate Event Experience</h2>
+                <p>
+                    At <span class="highlight">EventHive</span>, we specialize in creating unforgettable moments for
+                    your
+                    special occasions. Whether it's a wedding, corporate event, or private celebration, our team ensures
+                    every detail is perfect.
+                </p>
+                <p>
+                    With years of experience and a passion for excellence, we bring your vision to life. Let us handle
+                    the
+                    planning, so you can focus on enjoying your event.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="accordion" id="faqAccordion">
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1">
+                        How do I book an event?
+                    </button>
+                </h2>
+                <div id="q1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">You can book an event through our website by selecting the event and
+                        clicking on the "Book Now" button.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q2">
+                        What payment methods do you accept?
+                    </button>
+                </h2>
+                <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">We accept credit/debit cards, UPI, PayPal, and net banking.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q3">
+                        Can I cancel my booking?
+                    </button>
+                </h2>
+                <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Yes, cancellations are allowed up to 48 hours before the event.
+                        Cancellation charges may apply.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q4">
+                        Do I receive a refund for a canceled event?
+                    </button>
+                </h2>
+                <div id="q4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Refund policies vary by event. Please check the event details or contact
+                        our support team.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q5">
+                        Are group discounts available?
+                    </button>
+                </h2>
+                <div id="q5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Yes, we offer special discounts for group bookings. Contact us for more
+                        details.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q6">
+                        Can I change the attendee details after booking?
+                    </button>
+                </h2>
+                <div id="q6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Yes, you can modify attendee details through your account dashboard
+                        before the event starts.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q7">
+                        How do I know if an event is sold out?
+                    </button>
+                </h2>
+                <div id="q7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Our website will show a "Sold Out" label on events that are no longer
+                        available for booking.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q8">
+                        Do I need to bring a printed ticket to the event?
+                    </button>
+                </h2>
+                <div id="q8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">No, a digital copy of your ticket on your phone is enough for entry.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="contact-us">
+        <h2>Contact Us</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 style="text-align: left;"> Get in touch Today!</h1>
+                    <p>   We believe that great things happen when people connect. If you have an idea, a question, or
+                        need any assistance, don’t hesitate to contact us. We’re committed to providing the best
+                        experience and solutions for you. </p>
+                </div>
+                <div class="col-md-6">
+                    <form class="contact-form">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="mb-3">
+                            <input type="tel" class="form-control" placeholder="Phone Number">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="4" placeholder="Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map">
+        <h2>Our Location</h2>
+        <div class="container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d222520.23145046338!2d76.40205860137941!3d30.65681556429287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fe95f5435d125%3A0x97f51ba77de8560f!2sProEvents%20%26%20Promotions%20Pvt.%20Ltd!5e1!3m2!1sen!2sin!4v1738993586409!5m2!1sen!2sin"
+                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <section class="live-analytics">
+            <h2>📊 Live Event Insights</h2>
+            <p>Currently, <span id="event-live-users">10</span> users are browsing events.</p>
+        </section>
+        <div class="overlay">
+            <h1>Subscribe to Our Newsletter</h1>
+            <p>Stay updated with the latest events and offers.</p>
+            <form class="d-flex justify-content-center">
+                <input type="email" class="form-control me-2" placeholder="Enter your email" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% endblock %}
+
+</body>
+
+</html>

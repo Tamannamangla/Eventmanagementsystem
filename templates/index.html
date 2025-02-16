@@ -1,9 +1,487 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventHive - Landing Page</title>
+
+    <!-- Bootstrap & FontAwesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Swiper.js for Carousel -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+
+    <!-- Custom CSS -->
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 15px;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #ddd;
+            transition: 0.3s;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ff9800;
+        }
+
+        /* Home Section */
+        .home {
+            position: relative;
+            text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            color: white;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            position: relative;
+            z-index: 10;
+            /* Bring button to the front */
+        }
+
+        .home h1 {
+            font-size: 48px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .home p {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+
+        .animated-img {
+            animation: bounce 2s infinite alternate;
+        }
+
+        /* Bubbles Animation */
+        .bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+        }
+
+        .bubbles span {
+            position: absolute;
+            bottom: -10px;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            animation: rise 5s linear infinite;
+            border-radius: 50%;
+        }
+
+        /* Creating multiple bubble instances */
+        .bubbles span:nth-child(1) {
+            left: 10%;
+            animation-duration: 7s;
+            width: 25px;
+            height: 25px;
+        }
+
+        .bubbles span:nth-child(2) {
+            left: 20%;
+            animation-duration: 5s;
+            width: 20px;
+            height: 20px;
+        }
+
+        .bubbles span:nth-child(3) {
+            left: 30%;
+            animation-duration: 6s;
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Floating Bubble Animation */
+        @keyframes rise {
+            from {
+                transform: translateY(100px) scale(1);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-100vh) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Why Choose Us */
+        .why-choose-us {
+            background-color: white;
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .feature {
+            padding: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .feature:hover {
+            transform: translateY(-20px);
+        }
+
+        .why-choose-us h3 {
+            color: #2b88ba;
+        }
+
+        .h3_i {
+            display: flex;
+            margin-top: 15px;
+            margin-left: 50px;
+        }
+
+        i {
+            padding: 7px;
+        }
+
+        .team-section {
+            background-color: rgb(255, 255, 255);
+
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .team-section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+        }
+
+        .team-member {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .team-member p {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: #2c3e50;
+            /* Dark background */
+            color: #ffffff;
+            /* White text */
+            padding: 60px 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer h4 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #ff9800;
+            /* Accent color for headings */
+        }
+
+        .footer p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ddd;
+            /* Light gray text */
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer ul li a {
+            color: #ddd;
+            /* Light gray text */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer ul li a:hover {
+            color: #ff9800;
+            /* Accent color on hover */
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #ffffff;
+            /* White icons */
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #ff9800;
+            /* Accent color on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer .row {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer .col-md-4 {
+                margin-bottom: 30px;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-10px);
+            }
+        }
+
+        span {
+            color: red;
+            text-align: left;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Welcome to Event Management System</h1>
+
+
+    <!-- 🌟 Navbar Section -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">🎉 EventHive</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Feedback</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('login')}}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('register')}}">Signup</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 🎆 Home Section-->
+    <section class="home">
+        <div class="container">
+            <h1>🎊 Welcome to <span>EventHive</span></h1>
+            <p>Your one-stop destination for discovering and booking amazing events!</p>
+            <a href="{{url_for('register')}}" class="btn btn-primary">Start Your Journey</a>
+
+            <div class="bubbles">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Why Choose Us -->
+    <section class="why-choose-us">
+        <div class="container">
+            <h2>Why Choose Us? ✨</h2>
+            <div class="row">
+                <div class="col-md-4 feature">
+                    <img src="../static/images/whychooseus1.jpg" alt="" height="300px" width="350px">
+                    <div class="h3_i">
+                        <i class="fas fa-calendar-check fa-2x"></i>
+                        <h3>Verified Events</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 feature">
+                    <img src="../static/images/whychooseus1.jpg" alt="" height="300px" width="350px">
+                    <div class="h3_i">
+                        <i class="fas fa-users fa-2x"></i>
+                        <h3>Best Community</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 feature">
+                    <img src="../static/images/whychooseus1.jpg" alt="" height="300px" width="350px">
+                    <div class="h3_i"> <i class="fas fa-star fa-2x"></i>
+                        <h3>Top Ratings</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Members -->
+    <section class="team-section">
+        <h2>Meet Our Team</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <img src="../static/images/Screenshot 2025-02-15 at 11.43.41 PM.png" alt="Member 1">
+                        <p>
+                            <span>|</span> Tamanna - Leader
+                        </p>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <img src="../static/images/gourvi.png" alt="Member 2">
+                        <p><span>|</span> Gourvi - Member 2</p>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <img src="../static/images/photo.png" alt="Member 3">
+                        <p><span>|</span> Komalpreet - Member 3</p>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <img src="../static/images/tamanna.png" alt="Member 4">
+                        <p><span>|</span> Tamanna Choudhary - Member 4</p>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🦶 Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>EventHive</h4>
+                    <p>Your one-stop destination for discovering and booking amazing events.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Navbar Scroll Effect
+            window.addEventListener("scroll", () => {
+                const navbar = document.querySelector(".navbar");
+                if (window.scrollY > 50) {
+                    navbar.style.background = "rgba(0, 0, 0, 0.9)";
+                } else {
+                    navbar.style.background = "rgba(0, 0, 0, 0.85)";
+                }
+            });
+
+            // Floating Bubbles
+            const bubbles = document.querySelector(".bubbles");
+            setInterval(() => {
+                const bubble = document.createElement("span");
+                bubble.classList.add("bubble");
+                bubble.style.left = Math.random() * 100 + "vw";
+                bubble.style.animationDuration = Math.random() * 5 + 3 + "s";
+                bubbles.appendChild(bubble);
+                setTimeout(() => bubble.remove(), 5000);
+            }, 400);
+        });
+
+    </script>
+
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
+
 </html>

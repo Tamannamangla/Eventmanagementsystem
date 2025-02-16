@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Events Page</title>
+
+    <style>
+        /* General Reset */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+
+        body {
+
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+        }
+
+
+
+        header {
+
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+
+
+        header h1 {
+
+            font-size: 3em;
+            color: #4caf50;
+            margin-bottom: 10px;
+
+        }
+
+
+
+        header p {
+
+            font-size: 1.2em;
+            color: #777;
+
+        }
+
+
+
+        main {
+
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+
+        }
+
+
+
+        .event-section {
+
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+        }
+
+        .event-section:hover {
+            transform: translateY(-20px);
+        }
+
+
+
+        .event-section h2 {
+
+            font-size: 2em;
+            color: #4caf50;
+            margin-bottom: 20px;
+
+        }
+
+
+
+        .subsections {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 20px;
+
+        }
+
+        .subsection {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            background-color: #f9f9f9;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+
+
+        .subsection-content {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 20px;
+
+        }
+
+
+
+        .subsection-image {
+
+            width: 150px;
+
+            height: 150px;
+
+            object-fit: cover;
+
+            border-radius: 8px;
+
+        }
+
+
+
+        .subsection-text {
+
+            flex: 1;
+
+        }
+
+
+
+        .subsection h3 {
+
+            font-size: 1.5em;
+
+            color: #333;
+
+            margin-bottom: 10px;
+
+        }
+
+
+
+        .subsection p {
+
+            font-size: 1em;
+
+            color: #555;
+
+        }
+
+
+
+        .learn-more-btn {
+
+            background-color: #4caf50;
+
+            color: white;
+
+            border: none;
+
+            padding: 10px 20px;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+
+            font-size: 1em;
+
+            margin-top: 10px;
+
+        }
+
+
+
+        .learn-more-btn:hover {
+
+            background-color: #45a049;
+
+        }
+
+
+
+        footer {
+
+            text-align: center;
+
+            margin-top: 40px;
+
+            padding: 20px;
+
+            background-color: #4caf50;
+
+            color: #fff;
+
+            border-radius: 10px;
+
+        }
+
+
+
+        footer p {
+
+            font-size: 1em;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+<br><br><br>    <header>
+
+        <h1>Welcome to Event Planning</h1>
+
+        <p>Choose from a variety of events to make your special day memorable!</p>
+
+    </header>
+
+
+
+    <main>
+
+        <!-- Birthday Section -->
+
+        <section class="event-section" id="birthday">
+
+            <h2>Birthday</h2>
+
+            <div class="subsections">
+
+                <div class="subsection">
+
+                    <div class="subsection-content">
+
+                        <img src="{{ url_for('static', filename='images/outdoorbirthdayparty.jpg') }}"
+                            alt="Outdoor Birthday Party" class="subsection-image">
+
+                        <div class="subsection-text">
+
+                            <h3>Outdoor Birthday Party</h3>
+
+                            <p>Host a fun outdoor birthday with games, food, and more!</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='birthday1'">Learn
+                                More</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="subsection">
+
+                    <div class="subsection-content">
+
+                        <img src="{{ url_for('static', filename='images/kidsbirthdayparty.jpg') }}"
+                            alt="Kids Birthday Party" class="subsection-image">
+
+                        <div class="subsection-text">
+
+                            <h3>Kids Birthday Party</h3>
+
+                            <p>Plan an exciting birthday party for children with themed decorations and activities.</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='birthday2'">Learn
+                                More</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-content">
+                        <img src="{{ url_for('static', filename='images/surprise party.jpg') }}" alt="Surprise Party"
+                            class="subsection-image">
+                        <div class="subsection-text">
+                            <h3>Surprise Party</h3>
+                            <p>Organize a surprise party for your loved one with a secret guest list and secret
+                                location.</p>
+                            <button class="learn-more-btn" onclick="window.location.href='birthday3'">Learn
+                                More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+
+        <!-- Wedding Section -->
+
+        <section class="event-section" id="wedding">
+
+            <h2>Wedding</h2>
+
+            <div class="subsections">
+
+                <div class="subsection">
+
+                    <div class="subsection-content">
+
+                        <img src="{{ url_for('static', filename='images/destination weding.jpg') }}"
+                            alt="Destination Wedding" class="subsection-image">
+
+                        <div class="subsection-text">
+
+                            <h3>Destination Wedding</h3>
+
+                            <p>Plan a dream wedding at a beautiful location far away.</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='wed1'">Learn More</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="subsection">
+
+                    <div class="subsection-content">
+
+                        <img src="{{ url_for('static', filename='images/traditional wedding.jpg') }}"
+                            alt="Traditional Wedding" class="subsection-image">
+
+                        <div class="subsection-text">
+
+                            <h3>Traditional Wedding</h3>
+
+                            <p>Celebrate your special day with a classic traditional ceremony.</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='wed2'">Learn More</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="subsection">
+
+                    <div class="subsection-content">
+
+                        <img src="{{ url_for('static', filename='images/outdoor wedding.jpg') }}" alt="Outdoor Wedding"
+                            class="subsection-image">
+
+                        <div class="subsection-text">
+
+                            <h3>Outdoor Wedding</h3>
+
+                            <p>Say 'I Do' in a beautiful outdoor garden or by the beach.</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='wed3'">Learn More</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Retirement Party Section -->
+
+        <section class="event-section" id="retirement-party">
+
+            <h2>Retirement Party</h2>
+
+            <div class="subsections">
+
+                <div class="subsection">
+
+                    <div class="subsection-content">
+
+                        <img src="{{ url_for('static', filename='images/cocktail party.jpg') }}" alt="Cocktail Party"
+                            class="subsection-image">
+
+                        <div class="subsection-text">
+
+                            <h3>Cocktail Party</h3>
+
+                            <p>Host a classy retirement party with cocktails and a relaxed vibe.</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='party1'">Learn More</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="subsection">
+
+                    <div class="subsection-content">
+
+                        <img src="{{ url_for('static', filename='images/formalparty.jpg') }}" alt="Formal Dinner"
+                            class="subsection-image">
+
+                        <div class="subsection-text">
+
+                            <h3>Formal Dinner</h3>
+
+                            <p>Throw a formal retirement dinner with speeches and presentations.</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='party2'">Learn More</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="subsection">
+
+                    <div class="subsection-content">
+
+                        <img src="{{ url_for('static', filename='images/outdoor wedding.jpg') }}" alt="Themed Party"
+                            class="subsection-image">
+
+                        <div class="subsection-text">
+
+                            <h3>Themed Party</h3>
+
+                            <p>Celebrate the retiree's achievements with a themed party based on their career.</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='party3'">Learn More</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+
+        <!-- Anniversary Section -->
+
+        <section class="event-section" id="anniversary">
+
+            <h2>Anniversary</h2>
+
+            <div class="subsections">
+
+                <div class="subsection">
+
+                    <div class="subsection-content">
+
+                        <img src="{{ url_for('static', filename='images/outdoor wedding.jpg') }}" alt="Romantic Dinner"
+                            class="subsection-image">
+
+                        <div class="subsection-text">
+
+                            <h3>Romantic Dinner</h3>
+
+                            <p>A candlelit dinner for two at a fine restaurant.</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='#'">Learn More</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="subsection">
+
+                    <div class="subsection-content">
+
+                        <img src="{{ url_for('static', filename='images/outdoor wedding.jpg') }}"
+                            alt="Surprise Celebration" class="subsection-image">
+
+                        <div class="subsection-text">
+
+                            <h3>Surprise Celebration</h3>
+
+                            <p>Surprise your partner with a secret celebration with friends and family.</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='#'">Learn More</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="subsection">
+
+                    <div class="subsection-content">
+
+                        <img src="{{ url_for('static', filename='images/outdoor wedding.jpg') }}" alt="Renewal of Vows"
+                            class="subsection-image">
+
+                        <div class="subsection-text">
+
+                            <h3>Renewal of Vows</h3>
+
+                            <p>Celebrate your love by renewing your wedding vows.</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='#'">Learn More</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+
+
+        <!-- Baby Shower Section -->
+
+        <section class="event-section" id="baby-shower">
+
+            <h2>Baby Shower</h2>
+
+            <div class="subsections">
+
+                <div class="subsection">
+
+                    <div class="subsection-content">
+
+                        <img src="{{ url_for('static', filename='images/outdoor wedding.jpg') }}"
+                            alt="Themed Baby Shower" class="subsection-image">
+
+                        <div class="subsection-text">
+
+                            <h3>Themed Baby Shower</h3>
+
+                            <p>Host a creative themed baby shower with fun games and decorations.</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='#'">Learn More</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="subsection">
+
+                    <div class="subsection-content">
+
+                        <img src="{{ url_for('static', filename='images/outdoor wedding.jpg') }}"
+                            alt="Outdoor Baby Shower" class="subsection-image">
+
+                        <div class="subsection-text">
+
+                            <h3>Outdoor Baby Shower</h3>
+
+                            <p>Celebrate the new arrival with an outdoor baby shower in the fresh air.</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='#'">Learn More</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="subsection">
+
+                    <div class="subsection-content">
+
+                        <img src="{{ url_for('static', filename='images/outdoor wedding.jpg') }}"
+                            alt="Co-ed Baby Shower" class="subsection-image">
+
+                        <div class="subsection-text">
+
+                            <h3>Co-ed Baby Shower</h3>
+
+                            <p>Celebrate with both men and women in a fun, interactive way.</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='#'">Learn More</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+
+    </main>
+
+
+
+    <footer>
+
+        <p>Event Planning 2025 | All Rights Reserved</p>
+
+    </footer>
+    {% endblock %}
+</body>
+
+</html>

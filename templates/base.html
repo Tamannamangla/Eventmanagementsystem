@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,24 +8,52 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Navbar */
         .navbar {
-            background-color: rgb(198, 250, 253) !important; /* Transparent background */
+            background: rgba(0, 0, 0, 0.85);
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            /* Position at the top */
+            left: 0;
+            /* Align to the left */
+            width: 100%;
+            /* Full width */
+            z-index: 1000
         }
+
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #ddd;
+            transition: 0.3s;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ff9800;
+        }
+
         .search-container {
             display: flex;
             align-items: center;
-            background: rgb(141, 244, 239);
+            background: rgb(255, 255, 255);
             padding: 8px;
             border-radius: 50px;
             gap: 10px;
         }
+
         .search-container input {
             background: transparent;
             border: none;
             outline: none;
-            color: rgb(31, 152, 239);
+            color: rgb(0, 0, 0);
             padding: 5px 10px;
         }
+
         .search-container .search-icon {
             display: flex;
             align-items: center;
@@ -34,31 +63,144 @@
             width: 40px;
             height: 40px;
         }
+
         .search-container .search-icon i {
-            color: rgb(52, 140, 222);
+            color: rgb(0, 0, 0);
             font-size: 18px;
         }
+
         .navbar-nav .nav-item {
             margin-left: 15px;
-        
+
         }
+
         .logout-btn {
             display: flex;
             align-items: center;
             gap: 5px;
         }
-        .nav-link{
+
+        .nav-link {
             color: black;
+        }
+
+        footer {
+            position: relative;
+            color: rgb(253, 250, 250);
+            text-align: center;
+            padding: 30px 20px;
+            width: 100%;
+            background: url('https://eventsmanagementkerala.com/wp-content/uploads/2023/10/Event-management-in-Kerala.webp') no-repeat center center / cover;
+        }
+
+
+        .footer-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-section {
+            flex: 1;
+            max-width: 150px;
+        }
+
+        .footer-section h4 {
+            font-size: 32px;
+
+            text-transform: uppercase;
+
+        }
+
+        .footer-section p {
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+            font-size: large;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+            color: #ff9800;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            color: rgb(235, 231, 231);
+            font-size: 20px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #ff9800;
+            transform: scale(1.2);
+        }
+
+        .footer-bottom {
+            margin-top: 150px;
+            background: rgba(19, 26, 34, 0.8);
+            /* Slightly transparent black */
+            padding: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-section {
+                max-width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-        <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center" style="color: black;" href="#">
-                <i class="fa-solid fa-calendar-check me-2"></i> EventHive
-            </a>
-            
+
+    <!-- 🌟 Navbar Section -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">🎉 EventHive</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="search-container mx-auto">
                 <input type="search" placeholder="Search Events" aria-label="Search">
                 <span>|</span>
@@ -67,43 +209,94 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-calendar-days me-1"></i> Events</a>
+                        <a class="nav-link" href="{{url_for('event')}}"><i class="fa-solid fa-calendar-days me-1"></i>
+                            Events</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="galleryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="galleryDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-photo-film me-1"></i> Gallery
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="galleryDropdown">
-                            <li><a class="dropdown-item" href="#">Photos</a></li>
-                            <li><a class="dropdown-item" href="#">Videos</a></li>
+                            <li><a class="dropdown-item" href="{{url_for('photo')}}">Photos</a></li>
+                            <li><a class="dropdown-item" href="{{url_for('video')}}">Videos</a></li>
                             <li><a class="dropdown-item" href="#">Shorts</a></li>
-                            <li><a class="dropdown-item" href="#">Concerts</a></li>
-                            <li><a class="dropdown-item" href="#">Clubs</a></li>
-                            <li><a class="dropdown-item" href="#">Fests</a></li>
+                            
                         </ul>
-                    </li>
                     <li class="nav-item">
-                        <a class="btn btn-info logout-btn" href="#">
+                        <a class="btn btn-info logout-btn" href="{{ url_for('logout') }}">
                             <i class="fa-solid fa-sign-out-alt"></i> Logout
                         </a>
+                    </li>
+
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
     <div class="container mt-4">
-        {% block content %}{% endblock %}
+        {% block content %}
+
+        {% endblock %}
     </div>
+    <footer>
+        <div class="footer-overlay">
+
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>EventHive</h4>
+                <p>Your one-stop destination for discovering and booking amazing events.</p>
+            </div>
+
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li>Wedding Ceremonies</li>
+                        <li>Birthday Parties</li>
+                        <li>Concerts</li>
+                        <li>Outdoor Birthdays</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <div class="footer-section">
+                            <ul>
+                                <li>Tamanna</li>
+                                <li>Tamanna Choudhary</li>
+                                <li>Gourvi</li>
+                                <li>Komalpreet</li>
+                            </ul>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+    </footer>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

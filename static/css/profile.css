@@ -1,0 +1,33 @@
+
+  body {
+    background: linear-gradient(to bottom right, #bdbaba, #8a8484);
+
+  }
+h2{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.profile-container {
+    max-width: 700px !important;
+    margin: 40px auto !important;
+    padding: 20px !important;
+    background: #dfd8d8 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+}
+.profile-pic {
+    display: block !important;
+    margin: 0 auto !important;
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+}
+.btn-save {
+    background: #000000 !important;
+    color: rgb(255, 255, 255) !important;
+}
+.btn-save:hover {
+    background: #da1d1a !important;
+    color: rgb(255, 255, 255) !important;
+}
