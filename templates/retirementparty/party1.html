@@ -21,8 +21,12 @@
         }
 
         header {
-            background-color: #2c3e50;
-            color: white;
+            /* background-color: #2c3e50; */
+            background-image: url("{{ url_for('static', filename='images/cocktail2.jpg') }}");
+            opacity: 0.6;
+            background-size: cover; 
+            background-position: center;
+            color: rgb(255, 255, 255);
             text-align: center;
             padding: 20px 0;
         }
@@ -54,10 +58,11 @@
             padding: 50px 20px;
         }
 
-        .hero-section {
-            background-image: url('cocktail-hero.jpg');
-            background-size: cover;
-            color: rgb(239, 164, 164);
+        .hero-section { 
+            background-image: url("{{ url_for('static', filename='images/cocktail1.jpg') }}");
+            background-size: cover; 
+            background-position: center;
+            color: white;
             text-align: center;
             padding: 150px 20px;
         }
@@ -192,17 +197,21 @@
             }
         }
     </style>
+    
 </head>
 <body>
     {% extends 'contact.html' %}
     {% block content1 %}
-    <a href="{{url_for('event')}}"> <i class="fa-solid fa-xmark fa-3x" style="color: #cc1e1e;"></i></a>
-
 <header>
+    <a href="{{url_for('event')}}"> <i class="fa-solid fa-home fa-3x" style="color: #cc1e1e;"></i></a>
     <h1>Cocktail Party Extravaganza</h1>
     <p>The Perfect Evening of Elegance and Fun</p>
 </header>
 
+<div class="navbar">
+    <a href=""></a>
+    <a href=""></a>
+</div>
 
 <section class="hero-section">
     <h2>Join Us for an Unforgettable Night!</h2>
@@ -237,13 +246,15 @@
 <section id="gallery" class="gallery">
     <h2>Party Highlights</h2>
     <div class="gallery-images">
-        <img src="{{ url_for('static', filename='inimages/cock1.jpg') }}" alt="Cocktail Bar Setup">
-        <img src="{{ url_for('static', filename='inimages/cock2.jpg') }}" alt="Guests Enjoying Cocktails">
-        <img src="{{ url_for('static', filename='inimages/cock3.jpg') }}" alt="Signature Cocktails">
+        <img src="{{ url_for('static', filename='images/guests.jpeg') }}" alt="Cocktail Bar Setup">
+        <img src="{{ url_for('static', filename='images/guest.jpeg') }}" alt="Guests Enjoying Cocktails">
+        <img src="{{ url_for('static', filename='images/cock.jpeg') }}" alt="Signature Cocktails">
     </div>
     <p>Take a look at some of our past events and get inspired for your own party!</p>
 </section>
 
 {% endblock %}
+
+
 </body>
 </html>

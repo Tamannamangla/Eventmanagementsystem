@@ -23,8 +23,8 @@
     <section class="hero1">
         <div class="hero-content1">
             <ul class="">
-                {% if username %}
-                <h1>Welcome {{ username }}</h1>
+                {% if session['username'] %}
+                <h1>Welcome {{ session['username'] }}</h1>
 
                 {% else %}
                 <li class=""><a class="" href="{{ url_for('login') }}">Anonymous,Go to Login</a></li>

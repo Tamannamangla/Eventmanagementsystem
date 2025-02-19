@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Event Management System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Pacifico&family=Roboto:wght@300;400;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            overflow-y: auto;
+            position: relative;
+            text-align: center;
+        }
+        .container {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: auto;
+        }
+        h1 {
+            font-size: 3.5rem;
+            font-family: 'Pacifico', cursive;
+            color: #ff5733;
+            animation: fadeIn 2s ease-in-out;
+        }
+        p, li {
+            font-size: 1.3rem;
+            max-width: 900px;
+            margin: auto;
+            line-height: 1.8;
+            color: #f8f9fa;
+        }
+        h2 {
+            color: #ffeb3b;
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5rem;
+            margin-top: 30px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            animation: slideIn 2s ease-in-out;
+        }
+        li {
+            font-size: 1.2rem;
+            margin: 15px 0;
+            animation: fadeInUp 2s ease-in-out;
+        }
+        .button {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: #ffcc00;
+            color: #333;
+            font-size: 1.3rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease-in-out, background-color 0.3s;
+            box-shadow: 0px 4px 10px rgba(255, 204, 0, 0.5);
+        }
+        .button:hover {
+            background-color: #ff9800;
+            transform: scale(1.1);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .shape {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: floatAnimation 8s infinite alternate ease-in-out;
+        }
+        @keyframes floatAnimation {
+            from { transform: translateY(0px) rotate(0deg); }
+            to { transform: translateY(-50px) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating-shapes"></div>
+    <div class="container">
+        <a href="{{ url_for('home') }}"> <i class="fa-solid fa-house fa-2x" style="color: #ffffff;"></i></a>
+
+        <h1>Welcome to Our Event Hive</h1>
+        <p>We craft extraordinary experiences, ensuring every event is seamlessly executed, from corporate summits to lavish weddings. Our cutting-edge platform facilitates effortless planning and management, bringing your dream event to reality.</p>
+        <h2>Events We Masterfully Organize</h2>
+        <ul>
+            <li>Corporate Summits & Conferences</li>
+            <li>Luxury Weddings & Grand Receptions</li>
+            <li>Live Concerts & Music Festivals</li>
+            <li>Exclusive Birthday & Anniversary Galas</li>
+            <li>Charity Fundraisers & Community Events</li>
+            <li>Product Launches & Expos</li>
+        </ul>
+        <h2>Why Partner with Us?</h2>
+        <p>We provide innovative solutions that encompass venue selection, vendor coordination, guest management, and budget control. Our technology-driven approach ensures a hassle-free experience with real-time updates and precision planning.</p>
+        <h2>Comprehensive Services</h2>
+        <ul>
+            <li>Expert Event Planning & Execution</li>
+            <li>Premium Vendor & Venue Management</li>
+            <li>Personalized Guest List Coordination</li>
+            <li>Budget Optimization & Financial Tracking</li>
+            <li>On-site Event Management & Support</li>
+        </ul>
+        <h2>Contact Us</h2>
+        <p>Let's make your event extraordinary! Reach out to us at <strong>contact@eventmanagement.com</strong> or call <strong>+123 456 7890</strong> for a consultation.</p>
+        <a href="{{url_for('register')}}" class="button">Get Started</a>
+    </div>
+    <script>
+        function createShapes(count) {
+            const container = document.querySelector('.floating-shapes');
+            for (let i = 0; i < count; i++) {
+                let shape = document.createElement('div');
+                shape.className = 'shape';
+                shape.style.top = Math.random() * 100 + 'vh';
+                shape.style.left = Math.random() * 100 + 'vw';
+                shape.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(shape);
+            }
+        }
+        createShapes(40);
+    </script>
+</body>
+</html>

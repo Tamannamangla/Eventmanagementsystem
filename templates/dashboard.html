@@ -1,29 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Admin Dashboard</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        .extra{
+            margin-top: 10%;
+        }
+    </style>
 </head>
 <body>
-    <h2>Admin Dashboard</h2>
-    <h3>Add New Event</h3>
-    <form method="POST" action="{{ url_for('add_event') }}">
-        <input type="text" name="title" placeholder="Event Title" required><br>
-        <input type="text" name="description" placeholder="Event Description" required><br>
-        <input type="text" name="image" placeholder="Image URL" required><br>
-        <button type="submit">Add Event</button>
-    </form>
+    {% extends "base.html" %}
 
-    <h3>Existing Events</h3>
-    <ul>
-        {% for event in events %}
-            <li>
-                <strong>{{ event.title }}</strong> - {{ event.description }}
-                <img src="{{ event.image }}" width="100">
-                <a href="{{ url_for('delete_event', event_id=event.id) }}">Delete</a>
-            </li>
-        {% endfor %}
-    </ul>
-    
-    <a href="{{ url_for('logout') }}">Logout</a>
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="extra"></div>
+    <h1>Admin Dashboard</h1><br>
+    <h3>Welcome, {{ session['username'] }}! Manage your events below.</h3>
+    <br><br>
+    <a href="{{ url_for('add_event') }}" class="btn btn-success">Add Event</a>
+<br>
+<br>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Location</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in event %}
+            <tr>
+                <td>{{ event.id }}</td>
+                <td>{{ event.name }}</td>
+                <td>{{ event.category }}</td>
+                <td>{{ event.location }}</td>
+                <td>{{ event.date }}</td>
+                <td>{{ event.description }}</td>
+                <td><img src="{{ event.image_url }}" alt="Event Image" width="100"></td>
+                <td>
+                    <a href="{{ url_for('edit_event', event_id=event.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ url_for('delete_event', event_id=event.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
 </body>
 </html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .extra{
+            margin-top: 10%;
+        }
+    </style>
+</head>
+<body>
+    {% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="extra"></div>
+    <h2 class="text-center">Add Event</h2>
+    
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label">Event Name</label>
+            <input type="text" name="name" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+            <input type="text" name="category" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Location</label>
+            <input type="text" name="location" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input type="date" name="date" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="description" class="form-control" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Image URL (Optional)</label>
+            <input type="text" name="image_url" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Event</button>
+    </form>
+</div>
+{% endblock %}
+
+</body>
+</html>

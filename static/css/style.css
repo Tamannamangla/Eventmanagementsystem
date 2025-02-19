@@ -34,12 +34,16 @@
     padding: 100px 0;
     /* background: linear-gradient(to right, #ff9a9e, #fad0c4); */
     /* background: linear-gradient(to right, #ae9aff, #c4cdfa); */
-    background-image: url(../images/loginbg.png);
+    background-image: url(../images/Boyds.jpeg);
+    opacity: 0.85;
     background-size: cover;
     background-repeat: no-repeat;
    
     color: white;
     overflow: hidden;
+}
+.container1{
+    height: 450px;
 }
 
 .btn-primary {

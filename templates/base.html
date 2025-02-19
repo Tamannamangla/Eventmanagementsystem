@@ -18,7 +18,8 @@
     <!-- 🌟 Navbar Section -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="{{url_for('home')}}">🎉 <span class="project-name">Event</span> <span class="second-word"> Hive </span></a>
+            <a class="navbar-brand" href="{{url_for('home')}}">🎉 <span class="project-name">Event</span> <span
+                    class="second-word"> Hive </span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <i class="fas fa-bars"></i>
             </button>
@@ -31,8 +32,14 @@
                 </div>
             </div> -->
             <!-- <div id="search-results"></div> -->
+
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                    {% if 'role' in session and session['role'] == 'Admin' %}
+                    <li><a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                    {% endif %}</li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{url_for('event')}}"><i class="fa-solid fa-calendar-days me-1"></i>
                             Events
@@ -85,7 +92,7 @@
                         <li><a href="{{url_for('aboutus')}}">About Us</a></li>
                         <li><a href="{{url_for('feedback')}}">FeedBack</a></li>
                         <li><a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
-                    </li>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -95,67 +102,67 @@
     <!-- Bootstrap Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        
-         // Handle logout confirmation and redirection
-    document.getElementById('logoutButton').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default link behavior
 
-        // Show confirmation pop-up
-        if (confirm("Are you sure you want to log out?")) {
-            // If user clicks "Yes", proceed with logout
-            fetch("{{ url_for('logout') }}", {
-                method: 'GET',
-            }).then(response => {
-                if (response.ok) {
-                    alert("Logged out successfully!"); // Show success pop-up
-                    setTimeout(function() {
-                        window.location.href = "{{ url_for('index') }}"; // Redirect to index page after 5 seconds
-                    }, 5000); // 5 seconds delay
-                }
-            });
+        // Handle logout confirmation and redirection
+        document.getElementById('logoutButton').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default link behavior
+
+            // Show confirmation pop-up
+            if (confirm("Are you sure you want to log out?")) {
+                // If user clicks "Yes", proceed with logout
+                fetch("{{ url_for('logout') }}", {
+                    method: 'GET',
+                }).then(response => {
+                    if (response.ok) {
+                        alert("Logged out successfully!"); // Show success pop-up
+                        setTimeout(function () {
+                            window.location.href = "{{ url_for('index') }}"; // Redirect to index page after 5 seconds
+                        }, 5000); // 5 seconds delay
+                    }
+                });
+            }
+        });
+
+        const eventSearchInput = document.getElementById('event-search');
+        const locationSearchInput = document.getElementById('location-search');
+
+        eventSearchInput.addEventListener('input', function () {
+            performSearch(eventSearchInput.value, locationSearchInput.value);
+        });
+
+        locationSearchInput.addEventListener('input', function () {
+            performSearch(eventSearchInput.value, locationSearchInput.value);
+        });
+
+        function performSearch(eventQuery, locationQuery) {
+            fetch(`/search?event=${eventQuery}&location=${locationQuery}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Show search results dynamically
+                    let resultsHTML = '';
+                    if (data.events.length || data.locations.length) {
+                        if (data.events.length) {
+                            resultsHTML += '<h3>Events</h3><ul>';
+                            data.events.forEach(event => {
+                                resultsHTML += `<li>${event.name} - ${event.location}</li>`;
+                            });
+                            resultsHTML += '</ul>';
+                        }
+                        if (data.locations.length) {
+                            resultsHTML += '<h3>Locations</h3><ul>';
+                            data.locations.forEach(location => {
+                                resultsHTML += `<li>${location.name}</li>`;
+                            });
+                            resultsHTML += '</ul>';
+                        }
+                    } else {
+                        resultsHTML = '<p>No results found</p>';
+                    }
+                    document.getElementById('search-results').innerHTML = resultsHTML;
+                })
+                .catch(error => console.error('Error performing search:', error));
         }
-    });
-
-    const eventSearchInput = document.getElementById('event-search');
-    const locationSearchInput = document.getElementById('location-search');
-
-    eventSearchInput.addEventListener('input', function() {
-        performSearch(eventSearchInput.value, locationSearchInput.value);
-    });
-
-    locationSearchInput.addEventListener('input', function() {
-        performSearch(eventSearchInput.value, locationSearchInput.value);
-    });
-
-    function performSearch(eventQuery, locationQuery) {
-        fetch(`/search?event=${eventQuery}&location=${locationQuery}`)
-            .then(response => response.json())
-            .then(data => {
-                // Show search results dynamically
-                let resultsHTML = '';
-                if (data.events.length || data.locations.length) {
-                    if (data.events.length) {
-                        resultsHTML += '<h3>Events</h3><ul>';
-                        data.events.forEach(event => {
-                            resultsHTML += `<li>${event.name} - ${event.location}</li>`;
-                        });
-                        resultsHTML += '</ul>';
-                    }
-                    if (data.locations.length) {
-                        resultsHTML += '<h3>Locations</h3><ul>';
-                        data.locations.forEach(location => {
-                            resultsHTML += `<li>${location.name}</li>`;
-                        });
-                        resultsHTML += '</ul>';
-                    }
-                } else {
-                    resultsHTML = '<p>No results found</p>';
-                }
-                document.getElementById('search-results').innerHTML = resultsHTML;
-            })
-            .catch(error => console.error('Error performing search:', error));
-    }
-</script>
+    </script>
 </body>
 
 </html>

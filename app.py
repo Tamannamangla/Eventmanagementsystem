@@ -5,7 +5,6 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 import os
 import base64
 
-
 app = Flask(__name__)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -18,6 +17,15 @@ bcrypt = Bcrypt(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+# Flask-Login Setup
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return Admin.query.get(int(user_id))
 
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -38,7 +46,7 @@ class User(db.Model, UserMixin):
     social_media = db.Column(db.String(255), nullable=True)
     notifications = db.Column(db.String(50), nullable=True)
     profile_picture = db.Column(db.LargeBinary)  # Add this field in your User model
-    role = db.Column(db.String(15), nullable=False, default='user')
+    role = db.Column(db.String(15), nullable=False, default='User')
 
     def set_password(self, password):
         self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
@@ -46,9 +54,29 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return bcrypt.check_password_hash(self.password_hash, password)
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
+class Admin(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(150), unique=True, nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    password_hash = db.Column(db.String(256), nullable=False)
+
+    def set_password(self, password):
+        self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
+
+    def check_password(self, password):
+        return bcrypt.check_password_hash(self.password_hash, password)
+
+
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), nullable=False)  # Name of the event
+    category = db.Column(db.String(100), nullable=False)  # Category like Birthday, Wedding, etc.
+    location = db.Column(db.String(255), nullable=False)  # Location of the event
+    date = db.Column(db.String(50), nullable=False)  # Date of the event
+    description = db.Column(db.Text, nullable=False)  # Description of the event
+    image_url = db.Column(db.String(300))  # URL for event image
+
 
 @app.route('/')
 def index():
@@ -168,9 +196,10 @@ def login():
     if request.method == "POST":
         email_or_username = request.form.get("email_or_username", "").strip()
         password = request.form.get("password", "").strip()
-
+    
         user = None
-        if "@" in email_or_username:  # Check if input is an email
+
+        if "@" in email_or_username:  # Check if input is an email or username
             user = User.query.filter(User.email.ilike(email_or_username)).first()  #  Now filtering by email
         else:
             user = User.query.filter(User.username.ilike(email_or_username)).first()  #  Filtering by username
@@ -180,24 +209,21 @@ def login():
                 login_user(user)
                 session['user_id'] = user.id
                 session['username'] = user.name  # Store name in session
-               # flash("Login successful!", "success")
-                return redirect(url_for("home"))
+                session['role'] = user.role 
+                print("Session Data fter login: ", dict(session)) 
+                if user.role == "Admin":
+                    return redirect(url_for('dashboard'))
+                else:
+                    return redirect(url_for("home"))
             else:
                 flash("Invalid password!", "danger")
         else:
             flash("User not found!", "danger")
 
-        return render_template("login.html", email_or_username=email_or_username)  # Keep input in case of error
+        return render_template("login.html")  # Keep input in case of error
 
     return render_template("login.html")
 
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    session.pop("username", None)  # Remove username from session
-    session.pop("user_id", None)
-    return redirect(url_for("index"))
 
 
 @app.route('/profile', methods=['GET', 'POST'])
@@ -247,9 +273,19 @@ def profile():
     return render_template('profile.html', user=user, profile_picture=profile_picture)
 
 
+
+
 @app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    if "role" not in session or session["role"] != "Admin":
+        flash("Access denied. Admins only.", "danger")
+        return redirect(url_for("home"))
+
+    # Fetch all events from the database
+    event = Event.query.all()
+
+    return render_template("dashboard.html", event=event)
+
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -262,34 +298,46 @@ def submit():
     #     return "Please fill in all fields!", 400  # Bad request
 
     return render_template('thankyou.html')
-# Add Event
-@app.route("/admin/add_event", methods=["POST"])
-def add_event():
-    if "admin" not in session:
-        return redirect(url_for("admin_login"))
+#edit event
+@app.route("/edit_event/<int:event_id>", methods=["GET", "POST"])
+def edit_event(event_id):
+    if "role" not in session or session["role"] != "Admin":
+        flash("Access denied!", "danger")
+        return redirect(url_for("dashboard"))
 
-    title = request.form["title"]
-    description = request.form["description"]
-    image = request.form["image"]
+    event = Event.query.get(event_id)
 
-    new_event = Event(title=title, description=description, image=image)
-    db.session.add(new_event)
-    db.session.commit()
+    if request.method == "POST":
+        event.name = request.form["name"]
+        event.category = request.form["category"]
+        event.location = request.form["location"]
+        event.date = request.form["date"]
+        event.description = request.form["description"]
+        event.image_url = request.form["image_url"]
 
-    return redirect(url_for("admin_dashboard"))
+        db.session.commit()
+        flash("Event updated successfully!", "success")
+        return redirect(url_for("dashboard"))
+
+    return render_template("edit_event.html", event=event)
 
 # Delete Event
-# @app.route("/admin/delete_event/<int:event_id>")
-# def delete_event(event_id):
-#     if "admin" not in session:
-#         return redirect(url_for("admin_login"))
+@app.route("/delete_event/<int:event_id>", methods=["POST"])
+def delete_event(event_id):
+    if "role" not in session or session["role"] != "Admin":
+        flash("Access denied!", "danger")
+        return redirect(url_for("dashboard"))
 
-#     event = Event.query.get(event_id)
-#     if event:
-#         db.session.delete(event)
-#         db.session.commit()
+    event = Event.query.get(event_id)
+    if event:
+        db.session.delete(event)
+        db.session.commit()
+        flash("Event deleted successfully!", "success")
+    else:
+        flash("Event not found!", "danger")
 
-#     return redirect(url_for("admin_dashboard"))
+    return redirect(url_for("dashboard"))
+
 @app.route('/photo')
 def photo():
     return render_template('photo.html')
@@ -339,8 +387,48 @@ def shorts():
 def page_not_found(e):
     return render_template('error404.html'), 404
 
+@app.route("/add_event", methods=["GET", "POST"])
+@login_required  # Only logged-in users (Admins) can access
+def add_event():
+    if session.get("role") != "Admin":
+        flash("Access denied! Admins only.", "danger")
+        return redirect(url_for("dashboard"))  # Redirect normal users
+
+    if request.method == "POST":
+        name = request.form.get("name")
+        category = request.form.get("category")
+        location = request.form.get("location")
+        date = request.form.get("date")
+        description = request.form.get("description")
+        image_url = request.form.get("image_url")  # Optional Image URL
+
+        # Create a new event object
+        new_event = Event(
+            name=name,
+            category=category,
+            location=location,
+            date=date,
+            description=description,
+            image_url=image_url
+        )
+
+        db.session.add(new_event)
+        db.session.commit()
+        flash("Event added successfully!", "success")
+        return redirect(url_for("dashboard"))  # Redirect to dashboard
+
+    return render_template("add_event.html")
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    session.pop("username", None)  # Remove username from session
+    session.pop("user_id", None)
+    return redirect(url_for("index"))
+
 with app.app_context():
     db.create_all()
-
 if __name__ == '__main__':
+    
     app.run(debug=True,port=8080)
