@@ -1,0 +1,165 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url(../images/loginbg.png);
+    background-size: cover;
+    /* Ensures the background image covers the entire screen */
+    background-position: center;
+    /* Centers the background image */
+    /* background-attachment: fixed; */
+    /* Fixes the background image so it doesn't scroll */
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Ensures the body takes at least the full viewport height */
+    margin: 0;
+    color: #333;
+}
+
+.container1 {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    animation: fadeIn 1s ease-in-out;
+    min-height: 1140px;
+    /* Fixed height for the container */
+    /* overflow-y: auto; Makes the container scrollable if content overflows */
+    /* max-height: 100vh; */
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 35%;
+    /* Limits the container height to 90% of the viewport height */
+}
+
+.fa-xmark {
+    padding-left: 100%;
+    padding-top: 0%;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #000000;
+    font-size: 2rem;
+}
+
+.alert {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+form label {
+    /* display: block; */
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #000000;
+}
+
+form input,
+form select,
+form textarea {
+    width: 90%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 8px rgba(106, 17, 203, 0.3);
+    /* outline: none; */
+}
+
+form button {
+    width: 100%;
+    padding: 0.75rem;
+    background: #af38cd;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+form button:hover {
+    background: #2575fc;
+    transform: translateY(-2px);
+}
+.login{
+    margin-top: 10px;
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-links a {
+    color: #000000;
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #2575fc;
+    transform: translateY(-2px);
+}
+
+.google-signin {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.google-signin button {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.google-signin button:hover {
+    background: #f1f1f1;
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

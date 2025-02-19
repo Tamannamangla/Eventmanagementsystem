@@ -1,0 +1,147 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    /* background: linear-gradient(135deg, #5718a4, #502993); */
+    /* display: flex; 
+    justify-content: center;
+    align-items: center;*/
+    height: 100vh;
+    /*margin: 0;*/
+    
+    background-color: #deedf7 !important;
+}
+
+.container1 {
+    background-color: rgba(188, 237, 244, 0.851);
+    padding: 2rem;
+    margin-top: 10%;
+    margin-left: 35%;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    animation: fadeIn 1s ease-in-out;
+    /* position: absolute; */
+
+    top: 15%;
+}
+
+.fa-xmark {
+   margin-left: 100%;
+    cursor: pointer;
+}
+
+
+h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #000000;
+    font-size: 2rem;
+}
+
+.alert {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #555;
+}
+
+form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 8px rgba(106, 17, 203, 0.3);
+    outline: none;
+}
+
+form button {
+    width: 100%;
+    padding: 0.75rem;
+    background: #6a11cb;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+form button:hover {
+    background: #2575fc;
+    transform: translateY(-2px);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-links a {
+    color: #6a11cb;
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #2575fc;
+    transform: translateY(-2px);
+}
+
+.google-signin {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.google-signin button {
+    background: #d2e9ff;
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.google-signin button:hover {
+    background: #a8a8a8;
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

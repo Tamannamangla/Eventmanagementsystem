@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Gallery</title>
-   
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <style>
       
 
@@ -118,7 +119,9 @@
     </style>
 </head>
 <body>
-   
+    {% extends "base.html" %}
+
+    {% block content %}
     <div style="position: relative; width: 100%; height: 0; padding-top: 56.2225%;
  padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
  border-radius: 8px; will-change: transform;">
@@ -128,82 +131,82 @@
 </div>
   <div class="gallery">
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/1.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/6.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/7.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/11.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/5.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/2.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/3.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/8.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/9.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/10.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/4.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/12.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/13.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/14.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/15.mp4" type="video/mp4">
             </video>
         </div>
         <div class="video-container">
-            <video controls>
+            <video controls muted>
                 <source src="./static/videos/16.mp4" type="video/mp4">
             </video>
         </div>
@@ -217,6 +220,6 @@
    <div class="cont">
         <h1>Time Of Memories</h1>
     </div> 
-   
+    {% endblock %}
 </body>
 </html>

@@ -26,8 +26,8 @@
         header {
             width: 100%;
             height: 400px;
-            background-image: url('surprise-party-header.jpg'); /* Replace with your header image */
-            background-size: cover;
+            background-image: url("{{ url_for('static', filename='images/p.webp') }}");
+            background-size: cover; 
             background-position: center;
             display: flex;
             justify-content: center;
@@ -231,6 +231,8 @@
     </style>
 </head>
 <body>
+    {% extends 'contact.html' %}
+    {% block content1 %}
     <a href="{{url_for('event')}}"> <i class="fa-solid fa-xmark fa-3x" style="color: #cc1e1e;"></i></a>
 
     <header>
@@ -255,55 +257,44 @@
         <p>Here are some amazing theme ideas to give your surprise party a magical touch:</p>
         <div class="grid-container">
             <div class="grid-item">
-                <img src="surprise-party-idea1.jpg" alt="Secret Garden Theme">
+                <img src="{{ url_for('static', filename='images/garden.jpeg') }}" >
                 <h3>Secret Garden Theme</h3>
             </div>
             <div class="grid-item">
-                <img src="surprise-party-idea2.jpg" alt="Hollywood Glam">
+                <img src="{{ url_for('static', filename='images/glam1.jpeg') }}" >
                 <h3>Hollywood Glam</h3>
             </div>
             <div class="grid-item">
-                <img src="surprise-party-idea3.jpg" alt="Masquerade Ball">
+                <img src="{{ url_for('static', filename='images/ball.jpeg') }}" >
                 <h3>Masquerade Ball</h3>
             </div>
             <div class="grid-item">
-                <img src="surprise-party-idea4.jpg" alt="Surprise Movie Night">
+                <img src="{{ url_for('static', filename='images/movie.webp') }}" >
                 <h3>Surprise Movie Night</h3>
             </div>
         </div>
     </section>
 
-    <!-- Carousel Section -->
-    <div class="carousel-container">
-        <div class="carousel-slide">
-            <img src="surprise-party-image1.jpg" alt="Surprise Party Image 1" class="carousel-image">
-            <img src="surprise-party-image2.jpg" alt="Surprise Party Image 2" class="carousel-image">
-            <img src="surprise-party-image3.jpg" alt="Surprise Party Image 3" class="carousel-image">
-        </div>
-        <div class="carousel-controls">
-            <button class="prev" onclick="moveSlide(-1)">❮</button>
-            <button class="next" onclick="moveSlide(1)">❯</button>
-        </div>
-    </div>
+
 
     <section>
         <h2>Party Activities</h2>
         <p>Planning fun activities is crucial for a surprise party to be memorable! Here are some fun ideas:</p>
         <div class="grid-container">
             <div class="grid-item">
-                <img src="surprise-party-activity1.jpg" alt="Activity 1">
+                <img src="{{ url_for('static', filename='images/act4.webp') }}" >
                 <h3>Surprise Reveal</h3>
             </div>
             <div class="grid-item">
-                <img src="surprise-party-activity2.jpg" alt="Activity 2">
+                <img src="{{ url_for('static', filename='images/act1.jpeg') }}" >
                 <h3>Treasure Hunt</h3>
             </div>
             <div class="grid-item">
-                <img src="surprise-party-activity3.jpg" alt="Activity 3">
+                <img src="{{ url_for('static', filename='images/act2.webp') }}" >
                 <h3>Gift Exchange</h3>
             </div>
             <div class="grid-item">
-                <img src="surprise-party-activity4.jpg" alt="Activity 4">
+                <img src="{{ url_for('static', filename='images/act3.jpeg') }}" >
                 <h3>Surprise Karaoke</h3>
             </div>
         </div>
@@ -316,21 +307,26 @@
         </p>
         <div class="grid-container">
             <div class="grid-item">
-                <img src="surprise-party-food1.jpg" alt="Cupcakes">
+                <img src="{{ url_for('static', filename='images/cupcakes.jpeg') }}" >
                 <h3>Mini Cupcakes</h3>
             </div>
             <div class="grid-item">
-                <img src="surprise-party-food2.jpg" alt="Cocktails">
+                <img src="{{ url_for('static', filename='images/cocktail.jpg') }}" >
                 <h3>Colorful Cocktails</h3>
             </div>
             <div class="grid-item">
-                <img src="surprise-party-food3.jpg" alt="Cake">
+                <img src="{{ url_for('static', filename='images/cake.webp') }}" >
                 <h3>Surprise Cake</h3>
+            </div>
+            <div class="grid-item">
+                <img src="{{ url_for('static', filename='images/drinks.jpeg') }}" >
+                <h3>Drinks</h3>
             </div>
         </div>
     </section>
+    {% endblock %}
  <!-- Contact Section -->
- <section id="contact" class="contact">
+ <!-- <section id="contact" class="contact">
     <h2>Contact Us</h2>
     <p>If you have any questions or need more details, please don't hesitate to reach out.</p>
     <form>
@@ -374,7 +370,7 @@
             let offset = -slideIndex * 100;
             document.querySelector(".carousel-slide").style.transform = "translateX(" + offset + "%)";
         }
-    </script>
+    </script> -->
 
 </body>
 </html>

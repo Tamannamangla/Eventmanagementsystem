@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/feedback.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+    {% extends "base.html" %}
+
+    {% block content %}
+
+    <form action="/thank_you" method="POST">
+        <a href="{{ url_for('home') }}"> <i class="fa-solid fa-xmark fa-lg" style="color: #cc1e1e;"></i></a>
+
+        <h2><i class="fas fa-comments"></i> Feedback Form</h2>
+        <p>Let us know your thoughts, questions, or issues to help us improve our services.</p>
+
+        <h3><i class="fas fa-bullhorn"></i> Feedback Type: </h3>
+        <input type="radio" id="comments" name="feedback" value="comments" required>
+        <label for="comments">Comments</label>
+
+        <input type="radio" id="bug" name="feedback" value="bug_report">
+        <label for="bug">Bug Report</label>
+
+        <input type="radio" id="questions" name="feedback" value="questions">
+        <label for="questions">Questions</label>
+        <br><br>
+
+        <label for="name"><i class="fas fa-user"></i> Full Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter Your Name" class="input" required>
+
+        <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter Your Email" class="input" required>
+
+        <label for="comments"> <i class="fas fa-edit"></i> Describe Feedback:</label>
+        <textarea id="comments" name="description" placeholder="Describe Your Feedback Here" class="input" rows="4"
+            required></textarea>
+
+        <button type="submit"><i class="fas fa-paper-plane"></i> Submit Feedback</button>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </form>
+
+    <script>
+        // Function to remove flash messages after 5 seconds
+        setTimeout(function() {
+            let flashMessages = document.querySelectorAll('.success');
+            flashMessages.forEach(function(message) {
+                message.remove();
+            });
+        }, 3000); // 5000 milliseconds = 5 seconds
+    </script>
+
+        {% endblock %}
+
+    
+</body>
+</html>

@@ -1,34 +1,26 @@
-:root {
-    --primary-color: #ff0000;
-    --secondary-color: #2575fc;
-    --accent-color: #ff6f61;
-    --background-color: #9ab3dc;
-    --text-color: #333;
-    --light-text: #fff;
-}
+
 
 body {
     font-family: 'Poppins', sans-serif;
     background-image: url(/static/images/welcome\ pic.jpg);
     background-size: cover;
-    color: var(--text-color);
     background-attachment: fixed;
     /* Makes the background sticky */
     background-position: center;
 }
 
-.hero {
+.hero1 {
     height: 100vh;
     background: url(/static/images/welcome\ pic.jpg) no-repeat center center/cover;
+    
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
-    position: relative;
-    margin-bottom: 30px;
+    
 }
-
+/* 
 .hero::before {
     content: "";
     position: absolute;
@@ -37,22 +29,22 @@ body {
     width: 100%;
     height: 100%;
 
-}
+} */
 
-.hero-content {
+/* .hero-content {
     position: relative;
     z-index: 2;
     max-width: 600px;
-}
+} */
 
-.hero-content h1 {
+.hero-content1 h1 {
     font-size: 3.5rem;
     font-weight: 700;
     color: white;
     animation: fadeInDown 1.5s ease-in-out;
 }
 
-.hero-content p {
+.hero-content1 p {
     font-size: 1.5rem;
     color: white;
 
@@ -96,6 +88,7 @@ body {
     font-weight: bold;
     margin-top: 20px;
 }
+
 .trending-events {
     text-align: center;
     padding: 100px 10px;
@@ -113,7 +106,7 @@ body {
 
 .carousel {
     display: flex;
-    gap: 25px;
+    gap: 30px;
     animation: scroll 10s linear infinite;
 }
 
@@ -196,7 +189,7 @@ body {
 
 .why-choose-us .card-title {
     font-size: 1.5rem;
-    color: var(--secondary-color);
+    color: var(#2575fc);
 }
 
 .testimonials {
@@ -211,7 +204,7 @@ body {
     margin-bottom: 40px;
 }
 .testimonial-card {
-    background: var(--light-text);
+    background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -233,7 +226,7 @@ body {
 }
 
 .featured-events {
-    background-color: var(--light-text);
+    background-color: white;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     padding: 60px 20px;
@@ -310,7 +303,7 @@ body {
 
 .right-column h2 {
     font-size: 2.5rem;
-    color: var(--primary-color);
+    color: red;
     margin-bottom: 20px;
     font-family: 'Playfair Display', serif;
 }
@@ -318,12 +311,12 @@ body {
 .right-column p {
     font-size: 1.2rem;
     line-height: 1.6;
-    color: var(--text-color);
+    color: var(333);
     font-family: 'Poppins', sans-serif;
 }
 
 .right-column .highlight {
-    color: var(--accent-color);
+    color: var(#ff6f61);
     font-weight: bold;
 }
 
@@ -365,13 +358,13 @@ body {
 }
 
 .contact-form .btn {
-    background-color: var(--secondary-color);
+    background-color: rgb(101, 157, 221);
     border: none;
     transition: background-color 0.3s ease;
 }
 
 .contact-form .btn:hover {
-    background-color: var(--accent-color);
+    background-color:rgb(101, 157, 221);
 }
 
 .faq {
@@ -388,14 +381,14 @@ body {
 }
 
 .faq .accordion-button {
-    background-color: var(--background-color);
-    color: var(--text-color);
+    background-color: #9ab3dc;
+    color: rgb(255, 255, 255);
     font-weight: bold;
 }
 
 .faq .accordion-button:not(.collapsed) {
     background:linear-gradient(to bottom ,rgb(230, 170, 109), rgb(240, 134, 63));
-    color: var(--light-text);
+    color: white;
 }
 
 .map {
@@ -432,7 +425,7 @@ body {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     text-align: center;
-    color: var(--light-text);
+    color: white;
 }
 
 .newsletter h2 {
@@ -466,7 +459,7 @@ footer {
     background-color: black;
     padding: 20px;
     text-align: center;
-    color: var(--light-text);
+    color: white;
 }
 
 footer p {

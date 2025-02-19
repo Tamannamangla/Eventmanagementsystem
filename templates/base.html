@@ -4,192 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EventHive</title>
+    <title>{% block title %}EventHive{% endblock %}</title>
+
+    <!-- Bootstrap & FontAwesome -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Navbar */
-        .navbar {
-            background: rgba(0, 0, 0, 0.85);
-            padding: 15px;
-            position: fixed;
-            top: 0;
-            /* Position at the top */
-            left: 0;
-            /* Align to the left */
-            width: 100%;
-            /* Full width */
-            z-index: 1000
-        }
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
 
-        .navbar-brand {
-            color: #fff;
-            font-weight: bold;
-            font-size: 24px;
-        }
-
-        .navbar-nav .nav-link {
-            color: #ddd;
-            transition: 0.3s;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: #ff9800;
-        }
-
-        .search-container {
-            display: flex;
-            align-items: center;
-            background: rgb(255, 255, 255);
-            padding: 8px;
-            border-radius: 50px;
-            gap: 10px;
-        }
-
-        .search-container input {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: rgb(0, 0, 0);
-            padding: 5px 10px;
-        }
-
-        .search-container .search-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(134, 134, 134, 0.3);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-        }
-
-        .search-container .search-icon i {
-            color: rgb(0, 0, 0);
-            font-size: 18px;
-        }
-
-        .navbar-nav .nav-item {
-            margin-left: 15px;
-
-        }
-
-        .logout-btn {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .nav-link {
-            color: black;
-        }
-
-        footer {
-            position: relative;
-            color: rgb(253, 250, 250);
-            text-align: center;
-            padding: 30px 20px;
-            width: 100%;
-            background: url('https://eventsmanagementkerala.com/wp-content/uploads/2023/10/Event-management-in-Kerala.webp') no-repeat center center / cover;
-        }
-
-
-        .footer-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
-        }
-
-        .footer-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .footer-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .footer-section {
-            flex: 1;
-            max-width: 150px;
-        }
-
-        .footer-section h4 {
-            font-size: 32px;
-
-            text-transform: uppercase;
-
-        }
-
-        .footer-section p {
-            font-size: 18px;
-        }
-
-        .footer-section ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 10px;
-            font-size: large;
-        }
-
-        .footer-section ul li a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section ul li a:hover {
-            text-decoration: underline;
-            color: #ff9800;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .social-icons a {
-            color: rgb(235, 231, 231);
-            font-size: 20px;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            color: #ff9800;
-            transform: scale(1.2);
-        }
-
-        .footer-bottom {
-            margin-top: 150px;
-            background: rgba(19, 26, 34, 0.8);
-            /* Slightly transparent black */
-            padding: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .footer-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .footer-section {
-                max-width: 100%;
-                text-align: center;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -197,23 +18,25 @@
     <!-- 🌟 Navbar Section -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#">🎉 EventHive</a>
+            <a class="navbar-brand" href="{{url_for('home')}}">🎉 <span class="project-name">Event</span> <span class="second-word"> Hive </span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <i class="fas fa-bars"></i>
             </button>
-            <div class="search-container mx-auto">
-                <input type="search" placeholder="Search Events" aria-label="Search">
+            <!-- <div class="search-container mx-auto d-none d-lg-flex">
+                <input type="search" placeholder="Search Events" id="event" aria-label="Search">
                 <span>|</span>
-                <input type="search" placeholder="Search Locations" aria-label="Search">
+                <input type="search" placeholder="Search Locations" id="location-search" aria-label="Search">
                 <div class="search-icon">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
-            </div>
+            </div> -->
+            <!-- <div id="search-results"></div> -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{url_for('event')}}"><i class="fa-solid fa-calendar-days me-1"></i>
-                            Events</a>
+                            Events
+                        </a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="galleryDropdown" role="button"
@@ -223,80 +46,116 @@
                         <ul class="dropdown-menu" aria-labelledby="galleryDropdown">
                             <li><a class="dropdown-item" href="{{url_for('photo')}}">Photos</a></li>
                             <li><a class="dropdown-item" href="{{url_for('video')}}">Videos</a></li>
-                            <li><a class="dropdown-item" href="#">Shorts</a></li>
-                            
+                            <li><a class="dropdown-item" href="{{url_for('shorts')}}">Shorts</a></li>
                         </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('profile')}}"><i class="fa-solid fa-user me-1"></i>
+                            Profile
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="btn btn-info logout-btn" href="{{ url_for('logout') }}">
                             <i class="fa-solid fa-sign-out-alt"></i> Logout
                         </a>
                     </li>
-
-                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <!-- 🌟 Content Section -->
     <div class="container mt-4">
         {% block content %}
-
         {% endblock %}
     </div>
+
+    <!-- 🌟 Footer -->
     <footer>
-        <div class="footer-overlay">
-
-        </div>
-
+        <div class="footer-overlay"></div>
         <div class="footer-content">
-            <div class="footer-section">
-                <h4>EventHive</h4>
-                <p>Your one-stop destination for discovering and booking amazing events.</p>
-            </div>
-
+            <h4>EventHive</h4>
+            <p>Your one-stop destination for discovering and booking amazing events.</p>
             <div class="footer-container">
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="{{url_for('home')}}">Home</a></li>
+                        <li><a href="{{url_for('aboutus')}}">About Us</a></li>
+                        <li><a href="{{url_for('feedback')}}">FeedBack</a></li>
+                        <li><a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+                    </li>
                     </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Services</h4>
-                    <ul>
-                        <li>Wedding Ceremonies</li>
-                        <li>Birthday Parties</li>
-                        <li>Concerts</li>
-                        <li>Outdoor Birthdays</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Follow Us</h4>
-                    <div class="social-icons">
-                        <div class="footer-section">
-                            <ul>
-                                <li>Tamanna</li>
-                                <li>Tamanna Choudhary</li>
-                                <li>Gourvi</li>
-                                <li>Komalpreet</li>
-                            </ul>
-                        </div>
-
-
-
-
-
-                    </div>
                 </div>
             </div>
-
-
+        </div>
     </footer>
 
-
+    <!-- Bootstrap Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        
+         // Handle logout confirmation and redirection
+    document.getElementById('logoutButton').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        // Show confirmation pop-up
+        if (confirm("Are you sure you want to log out?")) {
+            // If user clicks "Yes", proceed with logout
+            fetch("{{ url_for('logout') }}", {
+                method: 'GET',
+            }).then(response => {
+                if (response.ok) {
+                    alert("Logged out successfully!"); // Show success pop-up
+                    setTimeout(function() {
+                        window.location.href = "{{ url_for('index') }}"; // Redirect to index page after 5 seconds
+                    }, 5000); // 5 seconds delay
+                }
+            });
+        }
+    });
+
+    const eventSearchInput = document.getElementById('event-search');
+    const locationSearchInput = document.getElementById('location-search');
+
+    eventSearchInput.addEventListener('input', function() {
+        performSearch(eventSearchInput.value, locationSearchInput.value);
+    });
+
+    locationSearchInput.addEventListener('input', function() {
+        performSearch(eventSearchInput.value, locationSearchInput.value);
+    });
+
+    function performSearch(eventQuery, locationQuery) {
+        fetch(`/search?event=${eventQuery}&location=${locationQuery}`)
+            .then(response => response.json())
+            .then(data => {
+                // Show search results dynamically
+                let resultsHTML = '';
+                if (data.events.length || data.locations.length) {
+                    if (data.events.length) {
+                        resultsHTML += '<h3>Events</h3><ul>';
+                        data.events.forEach(event => {
+                            resultsHTML += `<li>${event.name} - ${event.location}</li>`;
+                        });
+                        resultsHTML += '</ul>';
+                    }
+                    if (data.locations.length) {
+                        resultsHTML += '<h3>Locations</h3><ul>';
+                        data.locations.forEach(location => {
+                            resultsHTML += `<li>${location.name}</li>`;
+                        });
+                        resultsHTML += '</ul>';
+                    }
+                } else {
+                    resultsHTML = '<p>No results found</p>';
+                }
+                document.getElementById('search-results').innerHTML = resultsHTML;
+            })
+            .catch(error => console.error('Error performing search:', error));
+    }
+</script>
 </body>
 
 </html>

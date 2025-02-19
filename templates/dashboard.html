@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Dashboard</title>
 </head>
 <body>
-    <h1>hello
-        Tamanaa
-    </h1>
+    <h2>Admin Dashboard</h2>
+    <h3>Add New Event</h3>
+    <form method="POST" action="{{ url_for('add_event') }}">
+        <input type="text" name="title" placeholder="Event Title" required><br>
+        <input type="text" name="description" placeholder="Event Description" required><br>
+        <input type="text" name="image" placeholder="Image URL" required><br>
+        <button type="submit">Add Event</button>
+    </form>
+
+    <h3>Existing Events</h3>
+    <ul>
+        {% for event in events %}
+            <li>
+                <strong>{{ event.title }}</strong> - {{ event.description }}
+                <img src="{{ event.image }}" width="100">
+                <a href="{{ url_for('delete_event', event_id=event.id) }}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
     
+    <a href="{{ url_for('logout') }}">Logout</a>
 </body>
 </html>

@@ -1,223 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Destination Wedding</title>
-   <style>
-    /* Reset default browser styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-/* Body & Basic Styling */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f8f8f8;
-}
+    <style>
+        /* Reset default browser styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* Header Styling */
-header {
-    background-color: #333;
-    padding: 20px;
-    color: white;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 10;
-}
+        /* Body & Basic Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f8f8;
+        }
 
-header nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        /* Header Styling */
+        header {
+            background-color: #333;
+            padding: 20px;
+            color: white;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
 
-header .logo {
-    font-size: 24px;
-    font-weight: 700;
-}
+        header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-header ul {
-    list-style: none;
-    display: flex;
-}
+        header .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
 
-header ul li {
-    margin: 0 15px;
-}
+        header ul {
+            list-style: none;
+            display: flex;
+        }
 
-header ul li a {
-    text-decoration: none;
-    color: white;
-    font-weight: 500;
-}
+        header ul li {
+            margin: 0 15px;
+        }
 
-/* Hero Section */
-.hero {
-    background: url('destination_wedding_hero.jpg') no-repeat center center;
-    background-size: cover;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-    position: relative;
-}
+        header ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+        }
 
-.hero-content h1 {
-    font-size: 50px;
-    margin-bottom: 20px;
-}
+        /* Hero Section */
+        .hero {
+            background: url('destination_wedding_hero.jpg') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
 
-.hero-content p {
-    font-size: 20px;
-    margin-bottom: 30px;
-}
+        .hero-content h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
 
-.hero .btn {
-    padding: 12px 30px;
-    background-color: #ff7f50;
-    color: white;
-    font-size: 16px;
-    text-decoration: none;
-    border-radius: 5px;
-}
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
 
-.hero .btn:hover {
-    background-color: #ff6347;
-    transition: background-color 0.3s ease;
-}
+        .hero .btn {
+            padding: 12px 30px;
+            background-color: #ff7f50;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
 
-/* About Section */
-.about {
-    padding: 60px 20px;
-    text-align: center;
-    background-color: #fff;
-}
+        .hero .btn:hover {
+            background-color: #ff6347;
+            transition: background-color 0.3s ease;
+        }
 
-.about h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
+        /* About Section */
+        .about {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #fff;
+        }
 
-/* Services Section */
-.services {
-    padding: 60px 20px;
-    text-align: center;
-    background-color: #f1f1f1;
-}
+        .about h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
 
-.services h2 {
-    font-size: 32px;
-    margin-bottom: 40px;
-}
+        /* Services Section */
+        .services {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #f1f1f1;
+        }
 
-.service-card {
-    display: inline-block;
-    width: 30%;
-    margin: 20px;
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
+        .services h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
 
-.service-card h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
+        .service-card {
+            display: inline-block;
+            width: 30%;
+            margin: 20px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-.service-card p {
-    font-size: 16px;
-    color: #777;
-}
+        .service-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
 
-/* Gallery Section */
-#gallery {
-    padding: 40px 0;
-    background-color: #fff;
-}
+        .service-card p {
+            font-size: 16px;
+            color: #777;
+        }
 
-/* Contact Section */
-.contact {
-    padding: 60px 20px;
-    text-align: center;
-    background-color: #f1f1f1;
-}
+        /* Gallery Section */
+        #gallery {
+            padding: 40px 0;
+            background-color: #fff;
+        }
 
-.contact h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
+        /* Contact Section */
+        .contact {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #f1f1f1;
+        }
 
-.contact form {
-    max-width: 600px;
-    margin: 0 auto;
-    display: grid;
-    gap: 15px;
-}
+        .contact h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
 
-.contact form input,
-.contact form textarea {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%;
-}
+        .contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            gap: 15px;
+        }
 
-.contact form button {
-    padding: 12px 20px;
-    background-color: #ff7f50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        .contact form input,
+        .contact form textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+        }
 
-.contact form button:hover {
-    background-color: #ff6347;
-}
+        .contact form button {
+            padding: 12px 20px;
+            background-color: #ff7f50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-/* Footer Styling */
-footer {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
+        .contact form button:hover {
+            background-color: #ff6347;
+        }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .service-card {
-        width: 100%;
-    }
-}
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
 
-   </style>
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .service-card {
+                width: 100%;
+            }
+        }
+    </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <!-- Add the carousel library (Bootstrap) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <a href="{{url_for('event')}}"> <i class="fa-solid fa-xmark fa-3x" style="color: #cc1e1e;"></i></a>
 </head>
-<body>
 
+<body>
+    {% extends 'contact.html' %}
+    {% block content1 %}
     <!-- Navbar -->
-    <header>
-        <nav>
-            <div class="logo">Dream Destination Weddings</div>
-            <ul>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+
+    <a href="{{url_for('event')}}"> <i class="fa-solid fa-xmark fa-3x" style="color: #cc1e1e;"></i></a>
+
+    <h1>
+        <div class="logo">Dream Destination Weddings</div>
+    </h1>
+
+
+
 
     <!-- Hero Section with Animation -->
     <section class="hero" id="hero">
@@ -233,20 +234,25 @@ footer {
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ url_for('static', filename='inimages/wed1.jpg') }}" class="d-block w-100" alt="Wedding Image 1">
+                    <img src="{{ url_for('static', filename='img/wed11.jpeg') }}" class="d-block w-100"
+                        alt="Wedding Image 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ url_for('static', filename='inimages/wed2.jpg') }}" class="d-block w-100" alt="Wedding Image 2">
+                    <img src="{{ url_for('static', filename='img/wed12.jpg') }}" class="d-block w-100"
+                        alt="Wedding Image 2">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ url_for('static', filename='inimages/wed3.jpg') }}" class="d-block w-100" alt="Wedding Image 3">
+                    <img src="{{ url_for('static', filename='img/wed13.jpeg') }}" class="d-block w-100"
+                        alt="Wedding Image 3">
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
@@ -256,7 +262,8 @@ footer {
     <!-- About Section -->
     <section id="about" class="about">
         <h2>About Us</h2>
-        <p>We specialize in creating breathtaking destination weddings in the most beautiful locations worldwide. From tropical beaches to historic cities, we craft your wedding day to perfection.</p>
+        <p>We specialize in creating breathtaking destination weddings in the most beautiful locations worldwide. From
+            tropical beaches to historic cities, we craft your wedding day to perfection.</p>
     </section>
 
     <!-- Services Section -->
@@ -276,43 +283,7 @@ footer {
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2>Get in Touch</h2>
-        <p>Contact us for consultation or further inquiries about your dream wedding destination.</p>
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" required></textarea>
-            <button type="submit" id="sendMessageBtn" class="btn">Send Message</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Dream Destination Weddings | All Rights Reserved</p>
-    </footer>
-
-    <!-- Bootstrap and Custom JS for Carousel & Animation -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/fda438e364.js" crossorigin="anonymous"></script>
-    <script>
-        // Wait for the DOM to fully load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get the "Send Message" button by its ID
-            const sendMessageBtn = document.getElementById('sendMessageBtn');
-    
-            // Add a click event listener to the button
-            sendMessageBtn.addEventListener('click', function(event) {
-                // Prevent the form from submitting (optional)
-                event.preventDefault();
-    
-                // Display the alert message
-                alert('Message sent');
-            });
-        });
-    </script>
-    
+    {% endblock %}
 </body>
+
 </html>

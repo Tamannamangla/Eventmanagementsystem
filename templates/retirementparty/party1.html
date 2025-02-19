@@ -7,6 +7,8 @@
     <meta name="keywords" content="cocktail party, elegant cocktails, drinks, party planning, event hosting">
     <meta name="author" content="Your Name">
     <title>Cocktail Party Extravaganza</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="styles.css">
     <style>
         /* General Body Styling */
@@ -190,21 +192,17 @@
             }
         }
     </style>
-     <a href="{{url_for('event')}}"> <i class="fa-solid fa-xmark fa-3x" style="color: #cc1e1e;"></i></a>
 </head>
 <body>
+    {% extends 'contact.html' %}
+    {% block content1 %}
+    <a href="{{url_for('event')}}"> <i class="fa-solid fa-xmark fa-3x" style="color: #cc1e1e;"></i></a>
 
 <header>
     <h1>Cocktail Party Extravaganza</h1>
     <p>The Perfect Evening of Elegance and Fun</p>
 </header>
 
-<div class="navbar">
-    <a href="#about">About Us</a>
-    <a href="#services">Services</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#contact">RSVP</a>
-</div>
 
 <section class="hero-section">
     <h2>Join Us for an Unforgettable Night!</h2>
@@ -246,42 +244,6 @@
     <p>Take a look at some of our past events and get inspired for your own party!</p>
 </section>
 
-<section id="contact" class="contact">
-    <h2>RSVP for the Cocktail Party</h2>
-    <p>Let us know if you'll be joining the fun! Fill out the form below to reserve your spot.</p>
-    <form action="#">
-        <label for="name">Your Name</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name" required>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="4" placeholder="Special requests or dietary restrictions"></textarea>
-
-        <button type="submit" id="sendMessageBtn" class="btn">Send Message</button>
-    </form>
-</section>
-
-<footer>
-    <p>©️ 2025 Cocktail Party Extravaganza | All Rights Reserved</p>
-    <p>Follow us on social media: <a href="#">Instagram</a> | <a href="#">Facebook</a> | <a href="#">Pinterest</a></p>
-</footer>
-<script src="https://kit.fontawesome.com/fda438e364.js" crossorigin="anonymous"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get the "Send Message" button by its ID
-        const sendMessageBtn = document.getElementById('sendMessageBtn');
-
-        // Add a click event listener to the button
-        sendMessageBtn.addEventListener('click', function(event) {
-            // Prevent the form from submitting (optional)
-            event.preventDefault();
-
-            // Display the alert message
-            alert('Message sent');
-        });
-    });
-</script>
+{% endblock %}
 </body>
 </html>

@@ -1,216 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formal Dinner Event</title>
-   
+
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         /* General Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
 
-body {
-    background-color: #e4e2e2;
-    color: #333;
-}
+        body {
+            background-color: #e4e2e2;
+            color: #333;
+        }
 
-/* Header and Navbar */
-header {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-}
+        /* Header and Navbar */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+        }
 
-nav ul {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-}
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
 
-nav ul li {
-    margin: 0 20px;
-}
+        nav ul li {
+            margin: 0 20px;
+        }
 
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    transition: color 0.3s ease;
-}
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
 
-nav ul li a:hover {
-    color: #f1c40f;
-}
+        nav ul li a:hover {
+            color: #f1c40f;
+        }
 
-/* Hero Section */
-.hero {
-    background: url('hero-bg.jpg') no-repeat center center/cover;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-}
+        /* Hero Section */
+        .hero {
+            background: url('hero-bg.jpg') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
 
-.hero h1 {
-    font-size: 50px;
-    margin-bottom: 10px;
-    animation: fadeIn 2s ease-out;
-}
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 10px;
+            animation: fadeIn 2s ease-out;
+        }
 
-.hero p {
-    font-size: 20px;
-    animation: fadeIn 3s ease-out;
-}
+        .hero p {
+            font-size: 20px;
+            animation: fadeIn 3s ease-out;
+        }
 
-/* About Section */
-.about {
-    background-color: #fff;
-    padding: 60px 20px;
-    text-align: center;
-}
+        /* About Section */
+        .about {
+            background-color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+        }
 
-.about h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
 
-.about p {
-    font-size: 20px;
-}
+        .about p {
+            font-size: 20px;
+        }
 
-/* Menu Section */
-.menu {
-    padding: 60px 20px;
-    text-align: center;
-    background-color: #f9f9f9;
-}
+        /* Menu Section */
+        .menu {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
 
-.menu h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
-}
+        .menu h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
 
-.menu-items {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-}
+        .menu-items {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
 
-.menu-item {
-    width: 300px;
-}
+        .menu-item {
+            width: 300px;
+        }
 
-.menu-item img {
-    width: 100%;
-    border-radius: 10px;
-}
+        .menu-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
 
-.menu-item h3 {
-    font-size: 24px;
-    margin-top: 15px;
-}
+        .menu-item h3 {
+            font-size: 24px;
+            margin-top: 15px;
+        }
 
-.menu-item p {
-    font-size: 16px;
-    color: #777;
-}
+        .menu-item p {
+            font-size: 16px;
+            color: #777;
+        }
 
-/* Gallery Section */
-.gallery {
-    padding: 60px 20px;
-    text-align: center;
-    background-color: #fff;
-}
+        /* Gallery Section */
+        .gallery {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #fff;
+        }
 
-.swiper-container {
-    width: 100%;
-    height: 400px;
-}
+        .swiper-container {
+            width: 100%;
+            height: 400px;
+        }
 
-.swiper-slide img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
+        .swiper-slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
 
-/* Contact Section */
-.contact {
-    background-color: #f9f9f9;
-    padding: 60px 20px;
-    text-align: center;
-}
+        /* Contact Section */
+        .contact {
+            background-color: #f9f9f9;
+            padding: 60px 20px;
+            text-align: center;
+        }
 
-.contact h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
 
-.contact p {
-    font-size: 18px;
-    margin-bottom: 20px;
-}
+        .contact p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
 
-form {
-    max-width: 500px;
-    margin: 0 auto;
-}
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
 
-form input,
-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
 
-form button {
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        form button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-form button:hover {
-    background-color: #f1c40f;
-}
+        form button:hover {
+            background-color: #f1c40f;
+        }
 
-/* Footer */
-footer {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
 
-footer p {
-    font-size: 16px;
-}
+        footer p {
+            font-size: 16px;
+        }
 
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
 
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
+
 <body>
+    {% extends 'contact.html' %}
+    {% block content1 %}
     <a href="{{url_for('event')}}"> <i class="fa-solid fa-xmark fa-3x" style="color: #cc1e1e;"></i></a>
 
 
@@ -225,7 +231,9 @@ footer p {
     <!-- About Section -->
     <section id="about" class="about">
         <h2>About the Event</h2>
-        <p>Join us for an exquisite evening where the charm of fine dining meets luxury and class. Our formal dinner offers a refined atmosphere perfect for celebrating special occasions or simply enjoying a lavish night out.</p>
+        <p>Join us for an exquisite evening where the charm of fine dining meets luxury and class. Our formal dinner
+            offers a refined atmosphere perfect for celebrating special occasions or simply enjoying a lavish night out.
+        </p>
     </section>
 
     <!-- Menu Section -->
@@ -264,49 +272,7 @@ footer p {
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2>Contact Us</h2>
-        <p>If you have any questions or would like to make a reservation, please reach out to us.</p>
-        <form>
-            <input type="text" placeholder="Name" required>
-            <input type="email" placeholder="Email" required>
-            <textarea placeholder="Message" required></textarea>
-            <button type="submit" id="sendMessageBtn" class="btn">Send Message</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Formal Dinner Event. All rights reserved.</p>
-    </footer>
-
-    <!-- JavaScript for Swiper -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        // Get the "Send Message" button by its ID
-        const sendMessageBtn = document.getElementById('sendMessageBtn');
-
-        // Add a click event listener to the button
-        sendMessageBtn.addEventListener('click', function(event) {
-            // Prevent the form from submitting (optional)
-            event.preventDefault();
-
-            // Display the alert message
-            alert('Message sent');
-        });
-    });
-        var swiper = new Swiper('.swiper-container', {
-            spaceBetween: 10,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev'
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true
-            }
-        });
-    </script>
+    {% endblock %}
 </body>
+
 </html>

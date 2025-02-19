@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Contact Section */
+.contact {
+    background-color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.contact h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.contact form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: grid;
+    gap: 15px;
+}
+
+.contact form input,
+.contact form textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.contact form button {
+    padding: 12px 20px;
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact form button:hover {
+    background-color: #e64a19;
+}
+    </style>
+</head>
+<body>
+    {% block content1 %}
+
+    {% endblock %}
+ <!-- Contact Section -->
+ <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>If you have any questions or need more details, please don't hesitate to reach out.</p>
+    <form action="/submit" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn"> Send Message <i class="fas fa-paper-plane"></i></button>
+    </form>
+    
+</section>
+    <footer>
+        <p>Event Planning 2025 | All Rights Reserved</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        // Get the "Send Message" button by its ID
+        const sendMessageBtn = document.getElementById('sendMessageBtn');
+
+        // Add a click event listener to the button
+        sendMessageBtn.addEventListener('click', function(event) {
+            // Prevent the form from submitting (optional)
+            event.preventDefault();
+
+            // Display the alert message
+            alert('Message sent');
+        });
+    });
+        let slideIndex = 0;
+
+        function moveSlide(direction) {
+            let slides = document.querySelectorAll(".carousel-image");
+            slideIndex += direction;
+
+            if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            } else if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }
+
+            let offseta = -slideIndex * 100;
+            document.querySelector(".carousel-slide").style.transform = "translateX(" + offset + "%)";
+        }
+    </script>
+</body>
+</html>

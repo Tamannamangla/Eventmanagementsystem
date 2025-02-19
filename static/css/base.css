@@ -1,0 +1,207 @@
+ /* 🌟 Global Styles */
+ /* body {
+    padding-top: 80px;
+} */
+
+/* 🌟 Navbar */
+.navbar {
+    background: rgba(0, 0, 0, 0.85);
+    padding: 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.project-name{
+    font-style: italic;
+   
+    font-display:unset;
+    color: rgb(132, 252, 252);
+}
+.second-word{
+    color: rgb(20, 239, 239);
+    font-style: oblique;
+    font-display:unset;
+    font-size:larger;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.navbar-nav .nav-link {
+    color: #ddd;
+    transition: 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ff9800;
+}
+
+
+.navbar-nav .nav-item {
+    margin-left: 15px;
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 8px;
+    border-radius: 50px;
+    gap: 10px;
+}
+
+.search-container input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 5px 10px;
+}
+
+.search-container .search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(134, 134, 134, 0.3);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.search-container .search-icon i {
+    color: black;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+/* #search-results {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+} */
+#search-results {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+
+#search-results ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#search-results li {
+    padding: 5px 0;
+}
+
+
+/* 🌟 Footer */
+footer {
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    width: 100%;
+    background: url('https://eventsmanagementkerala.com/wp-content/uploads/2023/10/Event-management-in-Kerala.webp') no-repeat center center / cover;
+    position: relative;
+    margin-top: 50px;
+}
+
+.footer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    max-width: 200px;
+}
+
+.footer-section h4 {
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.footer-section ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    text-decoration: underline;
+    color: #ff9800;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 20px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #ff9800;
+    transform: scale(1.2);
+}
+
+/* 🌟 Responsive Design */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-section {
+        max-width: 100%;
+        text-align: center;
+    }
+}
