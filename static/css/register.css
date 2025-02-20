@@ -17,7 +17,7 @@ body {
 }
 
 .container1 {
-    background: #ffffff;
+    background-color: #A1D6E2;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -86,15 +86,15 @@ form textarea {
 form input:focus,
 form select:focus,
 form textarea:focus {
-    border-color: #6a11cb;
-    box-shadow: 0 0 8px rgba(106, 17, 203, 0.3);
+    border-color: #1995AD !important;
+    box-shadow: 0 0 8px rgba(17, 155, 253, 0.635);
     /* outline: none; */
 }
 
 form button {
     width: 100%;
     padding: 0.75rem;
-    background: #af38cd;
+    background: #1995AD;
     color: #000000;
     border: none;
     border-radius: 5px;

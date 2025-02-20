@@ -1,0 +1,233 @@
+  /* General Reset */
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+body {
+
+    font-family: Arial, sans-serif;
+    background-color: #A1D6E2 !important;
+    color: #333;
+    padding: 20px;
+}
+
+
+
+header {
+
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+
+
+header h1 {
+
+    font-size: 3em;
+    color: #ffffff;
+    margin-bottom: 10px;
+
+}
+
+
+
+header p {
+
+    font-size: 1.2em;
+    color: #777;
+
+}
+
+
+
+main {
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+}
+
+
+
+.event-section {
+
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+}
+
+.event-section:hover {
+    transform: translateY(-20px);
+}
+
+
+
+.event-section h2 {
+
+    font-size: 2em;
+    color: #1995AD;
+    margin-bottom: 20px;
+
+}
+
+
+
+.subsections {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+.subsection {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    background-color: #f9f9f9;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+
+
+.subsection-content {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+}
+
+
+
+.subsection-image {
+
+    width: 150px;
+
+    height: 150px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+
+}
+
+
+
+.subsection-text {
+
+    flex: 1;
+
+}
+
+
+
+.subsection h3 {
+
+    font-size: 1.5em;
+
+    color: #333;
+
+    margin-bottom: 10px;
+
+}
+
+
+
+.subsection p {
+
+    font-size: 1em;
+
+    color: #555;
+
+}
+
+
+
+.learn-more-btn {
+
+    background-color: #1995AD;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 20px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 1em;
+
+    margin-top: 10px;
+
+}
+
+
+
+.learn-more-btn:hover {
+
+    background-color: #45a049;
+
+}
+
+
+
+footer {
+
+    text-align: center;
+
+    margin-top: 40px;
+
+    padding: 20px;
+
+    background-color: #4caf50;
+
+    color: #fff;
+
+    border-radius: 10px;
+
+}
+
+
+
+footer p {
+
+    font-size: 1em;
+
+}
+
+@media (max-width: 768px) {
+    .subsection-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .subsection-image {
+        width: 100%;
+        height: auto;
+    }
+}

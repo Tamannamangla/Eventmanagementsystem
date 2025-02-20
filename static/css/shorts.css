@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    text-align: center;
+    background-image: url('https://c8.alamy.com/comp/2GP7171/colorful-party-invitation-background-abstract-pastel-blue-green-pink-yellow-texture-with-blurred-bokeh-lights-and-soft-color-circles-beautiful-backd-2GP7171.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+}
+
+
+h1 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 20px;
+    color: #0c0c0c;
+    font-size: 2.5em;
+    animation: fadeIn 1.5s ease-in-out;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: auto;
+
+}
+
+.video-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+video {
+    width: 300px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    /* margin: auto;
+    animation: fadeIn 1.5s ease-in-out;
+    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out; */
+}
+
+
+/* video:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3); 
+    border: 3px solid #ffcc00; 
+} */
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cont {
+    width: 1600px;
+    height: 400px;
+    background-image: url('https://ts2.mm.bing.net/th?id=OIP.Ub1qeXOFbguQSjfDJCK49AHaFj&pid=15.1');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+
+}
+
+.cont h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 120px;
+    color: #0f0f0f;
+    text-align: center;
+    margin-top: 190px;
+    margin-left: 100px;
+    width: 80%;
+    margin-top: 100px;
+    animation: fadeInMove 2s ease-in-out forwards;
+
+}
+
+
+
+@keyframes fadeInMove {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

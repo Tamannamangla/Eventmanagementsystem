@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import os
+from werkzeug.utils import secure_filename
 import base64
 
 app = Flask(__name__)
@@ -11,6 +12,12 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(basedir, "app.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['SECRET_KEY'] = 'your_secret_key'
+
+UPLOAD_FOLDER = 'static/uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -21,11 +28,6 @@ login_manager.login_view = 'login'
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
-# Flask-Login Setup
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return Admin.query.get(int(user_id))
 
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -92,7 +94,9 @@ def home():
 @app.route('/event')
 @login_required
 def event():
-    return render_template('event.html')
+    event = Event.query.all()
+    return render_template("event.html", event=event)
+  
 
 @app.route('/birthday1')
 @login_required
@@ -294,9 +298,6 @@ def submit():
     phone = request.form.get('phone')
     message = request.form.get('message')
 
-    # if not name or not email or not phone or not message:
-    #     return "Please fill in all fields!", 400  # Bad request
-
     return render_template('thankyou.html')
 #edit event
 @app.route("/edit_event/<int:event_id>", methods=["GET", "POST"])
@@ -388,7 +389,7 @@ def page_not_found(e):
     return render_template('error404.html'), 404
 
 @app.route("/add_event", methods=["GET", "POST"])
-@login_required  # Only logged-in users (Admins) can access
+@login_required  
 def add_event():
     if session.get("role") != "Admin":
         flash("Access denied! Admins only.", "danger")
@@ -400,9 +401,25 @@ def add_event():
         location = request.form.get("location")
         date = request.form.get("date")
         description = request.form.get("description")
-        image_url = request.form.get("image_url")  # Optional Image URL
+        image_url = None  # Default image path
+
+        if "image" in request.files:
+            file = request.files["image"]
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                if not os.path.exists(app.config["UPLOAD_FOLDER"]):
+                    os.makedirs(app.config["UPLOAD_FOLDER"])
+
+                file_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+                file.save(file_path)
+                image_url = file_path  # Save file path in the database
+            else:
+                image_url = None
+        else:
+            image_url = None
 
         # Create a new event object
+
         new_event = Event(
             name=name,
             category=category,

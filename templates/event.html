@@ -1,244 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* General Reset */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-
-
-        body {
-
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right bottom, ) !important;
-            color: #333;
-            padding: 20px;
-        }
-
-
-
-        header {
-
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-
-
-        header h1 {
-
-            font-size: 3em;
-            color: #4caf50;
-            margin-bottom: 10px;
-
-        }
-
-
-
-        header p {
-
-            font-size: 1.2em;
-            color: #777;
-
-        }
-
-
-
-        main {
-
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-
-        }
-
-
-
-        .event-section {
-
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-
-        }
-
-        .event-section:hover {
-            transform: translateY(-20px);
-        }
-
-
-
-        .event-section h2 {
-
-            font-size: 2em;
-            color: #4caf50;
-            margin-bottom: 20px;
-
-        }
-
-
-
-        .subsections {
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 20px;
-
-        }
-
-        .subsection {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 20px;
-
-            background-color: #f9f9f9;
-
-            padding: 15px;
-
-            border-radius: 8px;
-
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-
-        }
-
-
-
-        .subsection-content {
-
-            display: flex;
-
-            align-items: flex-start;
-
-            gap: 20px;
-
-        }
-
-
-
-        .subsection-image {
-
-            width: 150px;
-
-            height: 150px;
-
-            object-fit: cover;
-
-            border-radius: 8px;
-
-        }
-
-
-
-        .subsection-text {
-
-            flex: 1;
-
-        }
-
-
-
-        .subsection h3 {
-
-            font-size: 1.5em;
-
-            color: #333;
-
-            margin-bottom: 10px;
-
-        }
-
-
-
-        .subsection p {
-
-            font-size: 1em;
-
-            color: #555;
-
-        }
-
-
-
-        .learn-more-btn {
-
-            background-color: #4caf50;
-
-            color: white;
-
-            border: none;
-
-            padding: 10px 20px;
-
-            border-radius: 5px;
-
-            cursor: pointer;
-
-            font-size: 1em;
-
-            margin-top: 10px;
-
-        }
-
-
-
-        .learn-more-btn:hover {
-
-            background-color: #45a049;
-
-        }
-
-
-
-        footer {
-
-            text-align: center;
-
-            margin-top: 40px;
-
-            padding: 20px;
-
-            background-color: #4caf50;
-
-            color: #fff;
-
-            border-radius: 10px;
-
-        }
-
-
-
-        footer p {
-
-            font-size: 1em;
-
-        }
-        @media (max-width: 768px) {
-            .subsection-content {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .subsection-image {
-                width: 100%;
-                height: auto;
-            }
-        }
-        
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/event.css') }}">
 
 </head>
 
@@ -257,15 +25,40 @@
 
 
     <main>
-     
 
         <!-- Birthday Section -->
 
         <section class="event-section" id="birthday">
-
             <h2>Birthday</h2>
 
             <div class="subsections">
+
+                {% for event in event %}
+                {% if event.category.lower() == 'birthday' %}
+
+                <div class="subsection">
+                    <div class="subsection-content">
+                        {% if event.image_url %}
+                        <td><img src="{{ event.image_url }}" alt="Event Image" width="100" class="subsection-image"
+                                style="width: 200px; height: auto;"></td>
+                        {% endif %}
+
+                        <div class="subsection-text">
+                            <h3>{{ event.name }}</h3>
+
+                            <p><strong>Location:</strong> {{ event.location }}</p>
+                            <p><strong>Date:</strong> {{ event.date }}</p>
+                            <p><strong>Description:</strong>{{ event.description }}</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='birthday1'">Learn
+                                More</button>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+
+
 
                 <div class="subsection">
 
@@ -329,9 +122,33 @@
 
         <section class="event-section" id="retirement-party">
 
-            <h2>Retirement Party</h2>
+            <h2>Parties</h2>
 
             <div class="subsections">
+                {% for event in event %}
+                {% if event.category.lower() == 'parties' %}
+
+                <div class="subsection">
+                    <div class="subsection-content">
+                        {% if event.image_url %}
+                        <td><img src="{{ event.image_url }}" alt="Event Image" width="100" class="subsection-image"
+                                style="width: 200px; height: auto;"></td>
+                        {% endif %}
+
+                        <div class="subsection-text">
+                            <h3>{{ event.name }}</h3>
+
+                            <p><strong>Location:</strong> {{ event.location }}</p>
+                            <p><strong>Date:</strong> {{ event.date }}</p>
+                            <p><strong>Description:</strong>{{ event.description }}</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='birthday1'">Learn
+                                More</button>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
 
                 <div class="subsection">
 
@@ -388,8 +205,8 @@
 
                             <p>Celebrate the retiree's achievements with a themed party based on their career.</p>
 
-                            <button class="learn-more-btn" onclick="window.location.href='party3'">Learn More</button>
-
+                            <button class="learn-more-btn" onclick="window.location.href='birthday1'">Learn
+                                More</button>
                         </div>
 
                     </div>
@@ -406,6 +223,30 @@
             <h2>Wedding</h2>
 
             <div class="subsections">
+                {% for event in event %}
+                {% if event.category.lower() == 'wedding' %}
+
+                <div class="subsection">
+                    <div class="subsection-content">
+                        {% if event.image_url %}
+                        <td><img src="{{ event.image_url }}" alt="Event Image" width="100" class="subsection-image"
+                                style="width: 200px; height: auto;"></td>
+                        {% endif %}
+
+                        <div class="subsection-text">
+                            <h3>{{ event.name }}</h3>
+
+                            <p><strong>Location:</strong> {{ event.location }}</p>
+                            <p><strong>Date:</strong> {{ event.date }}</p>
+                            <p><strong>Description:</strong>{{ event.description }}</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='birthday1'">Learn
+                                More</button>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
 
                 <div class="subsection">
 
@@ -474,10 +315,6 @@
         </section>
 
 
-
-
-
-
         <!-- Anniversary Section -->
 
         <section class="event-section" id="anniversary">
@@ -485,6 +322,30 @@
             <h2>Anniversary</h2>
 
             <div class="subsections">
+                {% for event in event %}
+                {% if event.category.lower() == 'anniversary' %}
+
+                <div class="subsection">
+                    <div class="subsection-content">
+                        {% if event.image_url %}
+                        <td><img src="{{ event.image_url }}" alt="Event Image" width="100" class="subsection-image"
+                                style="width: 200px; height: auto;"></td>
+                        {% endif %}
+
+                        <div class="subsection-text">
+                            <h3>{{ event.name }}</h3>
+
+                            <p><strong>Location:</strong> {{ event.location }}</p>
+                            <p><strong>Date:</strong> {{ event.date }}</p>
+                            <p><strong>Description:</strong>{{ event.description }}</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='birthday1'">Learn
+                                More</button>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
 
                 <div class="subsection">
 
@@ -499,8 +360,8 @@
 
                             <p>A candlelit dinner for two at a fine restaurant.</p>
 
-                            <button class="learn-more-btn" onclick="window.location.href='#'">Learn More</button>
-
+                            <button class="learn-more-btn" onclick="window.location.href='birthday1'">Learn
+                                More</button>
                         </div>
 
                     </div>
@@ -520,8 +381,8 @@
 
                             <p>Surprise your partner with a secret celebration with friends and family.</p>
 
-                            <button class="learn-more-btn" onclick="window.location.href='#'">Learn More</button>
-
+                            <button class="learn-more-btn" onclick="window.location.href='birthday1'">Learn
+                                More</button>
                         </div>
 
                     </div>
@@ -541,8 +402,8 @@
 
                             <p>Celebrate your love by renewing your wedding vows.</p>
 
-                            <button class="learn-more-btn" onclick="window.location.href='#'">Learn More</button>
-
+                            <button class="learn-more-btn" onclick="window.location.href='birthday1'">Learn
+                                More</button>
                         </div>
 
                     </div>
@@ -562,6 +423,30 @@
             <h2>Baby Shower</h2>
 
             <div class="subsections">
+                {% for event in event %}
+                {% if event.category.lower() == 'baby shower' %}
+
+                <div class="subsection">
+                    <div class="subsection-content">
+                        {% if event.image_url %}
+                        <td><img src="{{ event.image_url }}" alt="Event Image" width="100" class="subsection-image"
+                                style="width: 200px; height: auto;"></td>
+                        {% endif %}
+
+                        <div class="subsection-text">
+                            <h3>{{ event.name }}</h3>
+
+                            <p><strong>Location:</strong> {{ event.location }}</p>
+                            <p><strong>Date:</strong> {{ event.date }}</p>
+                            <p><strong>Description:</strong>{{ event.description }}</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='birthday1'">Learn
+                                More</button>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
 
                 <div class="subsection">
 
@@ -576,8 +461,8 @@
 
                             <p>Host a creative themed baby shower with fun games and decorations.</p>
 
-                            <button class="learn-more-btn" onclick="window.location.href='#'">Learn More</button>
-
+                            <button class="learn-more-btn" onclick="window.location.href='birthday1'">Learn
+                                More</button>
                         </div>
 
                     </div>
@@ -597,8 +482,8 @@
 
                             <p>Celebrate the new arrival with an outdoor baby shower in the fresh air.</p>
 
-                            <button class="learn-more-btn" onclick="window.location.href='#'">Learn More</button>
-
+                            <button class="learn-more-btn" onclick="window.location.href='birthday1'">Learn
+                                More</button>
                         </div>
 
                     </div>
@@ -618,8 +503,8 @@
 
                             <p>Celebrate with both men and women in a fun, interactive way.</p>
 
-                            <button class="learn-more-btn" onclick="window.location.href='#'">Learn More</button>
-
+                            <button class="learn-more-btn" onclick="window.location.href='birthday1'">Learn
+                                More</button>
                         </div>
 
                     </div>
@@ -630,7 +515,37 @@
 
         </section>
 
+        <section class="event-section" id="retirement-party">
 
+            <h2>ceremony</h2>
+
+            <div class="subsections">
+                {% for event in event %}
+                {% if event.category.lower() == 'ceremony' %}
+
+                <div class="subsection">
+                    <div class="subsection-content">
+                        {% if event.image_url %}
+                        <td><img src="{{ event.image_url }}" alt="Event Image" width="100" class="subsection-image"
+                                style="width: 200px; height: auto;"></td>
+                        {% endif %}
+
+                        <div class="subsection-text">
+                            <h3>{{ event.name }}</h3>
+
+                            <p><strong>Location:</strong> {{ event.location }}</p>
+                            <p><strong>Date:</strong> {{ event.date }}</p>
+                            <p><strong>Description:</strong>{{ event.description }}</p>
+
+                            <button class="learn-more-btn" onclick="window.location.href='birthday1'">Learn
+                                More</button>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </section>
 
     </main>
 

@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background-image: url("https://th.bing.com/th/id/R.bbc73728066d8b595818792cf9f96e5d?rik=kyQQDFBuhaG7aw&riu=http%3a%2f%2fwww.pptbackgrounds.org%2fuploads%2fpink-colored-lines-powerpoint-backgrounds.jpg&ehk=4KrE9BMHPhDP0HQmcnZ44ypq1o%2fsLecgtnLO1K04a38%3d&risl=&pid=ImgRaw&r=0");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+
+  }
+
+
+  .gallery {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); */
+    grid-template-columns: 2.5fr 1.5fr 1.5fr 2.5fr;
+    /* grid-template-columns: repeat(3, 1fr);  */
+    gap: 55px;
+    /* width: 100%; */
+    max-width: 1300px;
+  }
+
+  .photo-card {
+    position: relative;
+    /* overflow: hidden; */
+    border-radius: 10px;
+    cursor: pointer;
+    transform: scale(1);
+    opacity: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 1s ease forwards;
+  }
+
+  .photo-card img {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    /* object-fit: cover; */
+    transition: transform 0.6s ease;
+  }
+
+  .photo-card:hover {
+    transform: scale(1.5);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .photo-card:hover img {
+    transform: scale(1.4);
+  }
+
+  /* Basic animation for card appearance */
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
+  #content {
+    border-radius: 15px;
+    font-style: oblique;
+    margin-top: 200px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    width: 900px;
+    padding: 30px;
+  }
+
+  .cont {
+    width: 1600px;
+    height: 400px;
+    margin-top: 60px;
+    background-image: url('https://images.pexels.com/photos/169193/pexels-photo-169193.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+
+  }
+
+  .cont h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 152px;
+    color: #0f0f0f;
+    text-align: center;
+    margin-top: 190px;
+    margin-left: 100px;
+    width: 80%;
+    margin-top: 100px;
+    animation: fadeInMove 2s ease-in-out forwards;
+
+  }
+
+
+
+  @keyframes fadeInMove {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

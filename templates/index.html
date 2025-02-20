@@ -64,7 +64,7 @@
     </section>
 
     <!-- Why Choose Us -->
-    <section class="why-choose-us">
+    <section class="why-choose-us" id="why-choose-us">
         <div class="container">
             <h2>Why Choose Us? ✨</h2>
             <div class="row">
@@ -196,6 +196,84 @@
         </div>
     </section>
 
+    <section class="features-section">
+        <h2 class="section-title">🚀 Why Choose <span>EventHive?</span></h2>
+        <p class="section-subtitle">Your ultimate event planning companion – seamless, smart, and spectacular!</p>
+
+        <div class="features-container">
+
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <i class="fas fa-calendar-check"></i>
+                <h3>Dynamic Event Management</h3>
+                <p>Create, edit, and manage events in just a few clicks. Whether it's a wedding, birthday, or corporate event, we've got you covered!</p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <i class="fas fa-users-cog"></i>
+                <h3>Role-Based Access</h3>
+                <p>Seamlessly switch between Admin and User roles with a single login system, ensuring smooth access and control.</p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <i class="fas fa-image"></i>
+                <h3>Stunning Event Showcase</h3>
+                <p>Showcase your events with eye-catching images, details, and descriptions to captivate your audience.</p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <i class="fas fa-list"></i>
+                <h3>Personalized Event Listings</h3>
+                <p>Browse events easily with categories like Birthdays, Weddings, Baby Showers, and more.</p>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <i class="fas fa-tools"></i>
+                <h3>Admin Dashboard</h3>
+                <p>Organizers get full control over event creation, editing, and deletion with an intuitive dashboard.</p>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <i class="fas fa-upload"></i>
+                <h3>Effortless Image Uploads</h3>
+                <p>Upload event images directly without the hassle of external links.</p>
+            </div>
+
+            <!-- Feature 7 -->
+            <div class="feature-card">
+                <i class="fas fa-comment-dots"></i>
+                <h3>Contact & Inquiry System</h3>
+                <p>Users can easily reach out for bookings or event details, ensuring smooth communication.</p>
+            </div>
+
+            <!-- Feature 8 -->
+            <div class="feature-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Mobile-Friendly & Responsive</h3>
+                <p>EventHive is designed to look stunning across desktops, tablets, and smartphones.</p>
+            </div>
+
+            <!-- Feature 9 -->
+            <div class="feature-card">
+                <i class="fas fa-infinity"></i>
+                <h3>Smart Pagination & Infinite Scrolling</h3>
+                <p>Enjoy smooth browsing with fast-loading event feeds and endless scrolling.</p>
+            </div>
+
+            <!-- Feature 10 -->
+            <div class="feature-card">
+                <i class="fas fa-palette"></i>
+                <h3>Elegant UI/UX</h3>
+                <p>Engage users with a sleek, modern, and visually appealing interface with animations and smooth transitions.</p>
+            </div>
+
+        </div>
+    </section>
     <!-- Team Members -->
     <section class="team-section">
         <h2>Meet Our Team</h2>
@@ -251,31 +329,73 @@
         </div>
     </section>
 
-    <!-- 🦶 Footer Section -->
+    <!--  Footer Section -->
+    
     <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h4>EventHive</h4>
-                    <p>Your one-stop destination for discovering and booking amazing events.</p>
-                </div>
-                <div class="col-md-4">
-                    <h4>Quick Links</h4>
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img src="../static/images/logo1.png" class="footer-logo" alt="No"
+                    height="210px" width="200px">
+            </div>
+            <div class="footer-description">
+                <p>
+                    EventHive is your one-stop destination for seamless event planning. Whether it's a birthday,
+                    wedding, corporate gathering, or any special occasion, we bring your vision to life with precision
+                    and creativity.
+<br>
+                    With a passionate team of event professionals, we handle everything from venue selection and décor
+                    to entertainment and catering, ensuring a stress-free and memorable experience. 
+<br>
+                    At EventHive, we believe that every event tells a story, and we are here to make yours
+                    extraordinary. Let us take care of the details while you enjoy the moments that truly matter!
+
+                </p>
+            </div>
+            <div class="footer-contact">
+                <p><strong>Phone:</strong> +91 8168428500</p>
+                <p><strong>Fax:</strong> +1 916-875-2235</p>
+                <p><strong>Email:</strong> manglastamanna@gmail.com</p>
+                <p><strong>Website:</strong> <a href="index.html">www.EventHive.com</a></p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>OUR SERVICES</h3>
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="{{url_for('aboutus')}}">About Us</a></li>
-                        <li><a href="{{url_for('feedback')}}">FeedBack</a></li>
-                        <li><a href="{{url_for('privacy_policy')}}">Privacy Policy</a></li>
+                        <li><a href="#why-choose-us">Services</a></li>
+                        <li><a href="#why-choose-us">Features</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4">
-                    <h4>Follow Us</h4>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </div>
+                <div class="footer-column">
+                    <h3>QUICK LINK</h3>
+                    <ul>
+                        <li><a href="#">Knowledge Base</a></li>
+                        <li><a href="#">Hire An Expert</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>RESOURCES</h3>
+                    <ul>
+                        <li><a href="#">Knowledge Base</a></li>
+                        <li><a href="#">Hire An Expert</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>IMPORTANT LINK</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Condition</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -289,7 +409,7 @@
 
     <!-- Swiper JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    
+
     <!-- css JavaScript -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {

@@ -5,11 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .extra{
-            margin-top: 10%;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit_event.css') }}">
 </head>
 <body>
     {% extends "base.html" %}
@@ -42,8 +38,11 @@
         </div>
         <div class="mb-3">
             <label for="image_url" class="form-label">Image URL</label>
-            <input type="text" class="form-control" name="image_url" value="{{ event.image_url }}">
+            <input type="text" class="form-control" name="image_url" value="{{ event.image_url }}"> 
+            <!-- accept="image/*" -->
         </div>
+        
+     
         <button type="submit" class="btn btn-success">Update Event</button>
         <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Cancel</a>
     </form>

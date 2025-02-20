@@ -444,26 +444,13 @@ body {
 }
 
 .newsletter .btn {
-    background-color: rgb(255, 38, 0);
+    background-color: #1995AD;
     border: none;
     transition: background-color 0.3s ease;
 }
 
 .newsletter .btn:hover {
     background-color: rgb(255, 77, 0);
-}
-
-footer {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    background-color: black;
-    padding: 20px;
-    text-align: center;
-    color: white;
-}
-
-footer p {
-    margin: 0;
 }
 
 @media (max-width: 768px) {

@@ -12,7 +12,7 @@ h2{
     max-width: 700px !important;
     margin: 40px auto !important;
     padding: 20px !important;
-    background: #dfd8d8 !important;
+    background: #A1D6E2 !important;
     border-radius: 10px !important;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
 }
@@ -25,8 +25,8 @@ h2{
     object-fit: cover !important;
 }
 .btn-save {
-    background: #000000 !important;
-    color: rgb(255, 255, 255) !important;
+    background: #1995AD !important;
+    color: #ffffff !important;
 }
 .btn-save:hover {
     background: #da1d1a !important;

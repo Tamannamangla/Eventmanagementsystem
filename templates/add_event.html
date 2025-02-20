@@ -5,11 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .extra{
-            margin-top: 10%;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_event.css') }}">
+
 </head>
 <body>
     {% extends "base.html" %}
@@ -19,7 +16,7 @@
     <div class="extra"></div>
     <h2 class="text-center">Add Event</h2>
     
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label class="form-label">Event Name</label>
             <input type="text" name="name" class="form-control" required>
@@ -46,11 +43,11 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Image URL (Optional)</label>
-            <input type="text" name="image_url" class="form-control">
+            <label class="form-label">Upload Event Image</label>
+            <input type="file" name="image" class="form-control" accept="image/*" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Add Event</button>
+        <button type="submit" class="btn">Add Event</button>
     </form>
 </div>
 {% endblock %}

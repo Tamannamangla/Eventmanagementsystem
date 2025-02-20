@@ -17,16 +17,7 @@
         <a href="{{ url_for('index') }}"> <i class="fa-solid fa-xmark fa-lg" style="color: #cc1e1e;"></i></a>
         <h1>Register</h1>
         <form method="POST" action="{{ url_for('register') }}">
-<!-- 
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">
-            {{ message }}
-        </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %} -->
+
             <label for="name">Name: <span style="color: red;">*</span> </label>
             <input type="text" id="name" name="name" required>
 
@@ -59,14 +50,9 @@
             <label for="hobbies">Hobbies:</label>
             <textarea id="hobbies" name="hobbies" rows="3"></textarea>
 
-            <!-- Admin Role Selection
-
-            <label for="role">Select Role (Admin or User):</label>
-            <select id="role" name="role">
-                <option value="user">User</option>
-                <option value="admin">Admin</option>
-            </select> -->
+          
             <button type="submit">Register</button>
+
             <p>Already Have An Account? <a href="{{url_for('login')}}" class="login"> Login</a></p>
         </form>
 
