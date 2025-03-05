@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends "base.html" %}
+{% block content %}
+<br><br><br><br>
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-info">
+   {{ message }}
+
+ </div>
+{% endfor %}
+<h2>Add New Admin / Event Manager</h2>
+
+<form action="{{ url_for('add_admin') }}" method="POST",enctype="multipart/form-data">
+    <label for="name">Name:</label>
+    <input type="text" name="name" required>
+    <label for="username">UserName:</label>
+    <input type="text" name="username" required>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" required>
+
+    <label for="phone">Phone:</label>
+    <input type="text" name="phone" required>
+
+    <label for="role">Role:</label>
+    <select name="role" required>
+        <option value="admin">Admin</option>
+        <option value="event_manager">Event Manager</option>
+    </select>
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" required>
+
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender" required>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+    </select>
+
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" name="dob">
+
+    <label for="hobbies">Hobbies:</label>
+    <textarea id="hobbies" name="hobbies" rows="3"></textarea>
+
+    <label for="bio">Bio:</label>
+    <textarea id="bio" name="bio" rows="3"></textarea>
+
+    <label for="address">Address:</label>
+    <textarea id="address" name="address" rows="3"></textarea>
+
+    <label for="social_media">Social Media Links:</label>
+    <input type="text" id="social_media" name="social_media" placeholder="Enter social media links">
+    <!-- Notifications Checkbox -->
+    <div class="checkbox-container">
+        <input type="checkbox" name="notifications" >
+        <label for="notifications">Enable Notifications</label>
+    </div>
+
+
+
+    <button type="submit">Add Admin</button>
+</form>
+
+<a href="{{ url_for('super_admin_dashboard') }}">Back to Dashboard</a>
+{% endblock %}
+
+</body>
+</html>

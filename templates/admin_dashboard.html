@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+</head>
+<body>
+    {% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <br><br><br>
+    <h1>Admin Dashboard</h1>
+    <h3>Welcome, {{ session['username'] }}!</h3>
+    
+    <hr>
+    
+    <!-- Event Managers Section -->
+    <h2>Manage Event Managers</h2>
+    <a href="{{ url_for('add_admin') }}" class="btn btn-primary">Add Event Manager</a><br><hr>
+    
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for manager in event_managers %}
+            <tr>
+                <td>{{ manager['id'] }}</td>
+        <td>{{ manager['name'] }}</td>
+        <td>{{ manager['email'] }}</td>
+        <td>{{ manager['phone'] }}</td>
+        <td>
+            <a href="{{ url_for('admin_profile', user_id=manager['id']) }}" class="btn btn-info btn-sm">View Profile</a>
+            <form action="{{ url_for('delete_admin', user_id=manager['id']) }}" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+            </form>
+        </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <hr>
+    
+    <!-- Events Section -->
+    <h2>Manage Events</h2>
+    <a href="{{ url_for('add_event') }}" class="btn btn-success">Add Event</a>
+    <br><hr>
+    
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Location</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in event %}
+            <tr>
+                <td>{{ event.id }}</td>
+                <td>{{ event.name }}</td>
+                <td>{{ event.category }}</td>
+                <td>{{ event.location }}</td>
+                <td>{{ event.date }}</td>
+                <td>
+                    <form action="{{ url_for('delete_event', event_id=event.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form></td>
+            </tr>
+         
+      
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+</body>
+</html>

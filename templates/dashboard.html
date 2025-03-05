@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Event Manager Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 
 </head>
 <body>
     {% extends "base.html" %}
 
-{% block title %}Admin Dashboard{% endblock %}
+{% block title %}Event Manager Dashboard{% endblock %}
 
 {% block content %}
 <div class="container">
-    <div class="extra"></div>
-    <h1>Admin Dashboard</h1><br>
+    <div class="extra">
+    <h1>Event Manager Dashboard</h1><br></div>
     <h3>Welcome, {{ session['username'] }}! Manage your events below.</h3>
     <br><br>
     <a href="{{ url_for('add_event') }}" class="btn btn-success">Add Event</a>

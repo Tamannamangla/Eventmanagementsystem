@@ -11,7 +11,7 @@ body {
 
 .hero1 {
     height: 100vh;
-    background: url(/static/images/welcome\ pic.jpg) no-repeat center center/cover;
+    background-image: url(/static/images/welcome\ pic.jpg) no-repeat center center/cover;
     
     display: flex;
     justify-content: center;
@@ -20,22 +20,6 @@ body {
     text-align: center;
     
 }
-/* 
-.hero::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-} */
-
-/* .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 600px;
-} */
 
 .hero-content1 h1 {
     font-size: 3.5rem;
@@ -107,7 +91,7 @@ body {
 .carousel {
     display: flex;
     gap: 30px;
-    animation: scroll 10s linear infinite;
+   
 }
 
 .event-card {
@@ -218,9 +202,9 @@ body {
 }
 
 .testimonial-avatar {
-    width: 80px; 
-    height: 80px; 
-    border-radius: 35%;
+    width: 90px; 
+    height: 100px; 
+    border-radius: 30%;
     object-fit: cover;
     margin-bottom: 10px;
 }

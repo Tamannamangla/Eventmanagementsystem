@@ -4,7 +4,9 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import os
 from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash
 import base64
+import sqlite3
 
 app = Flask(__name__)
 
@@ -55,19 +57,6 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return bcrypt.check_password_hash(self.password_hash, password)
-
-class Admin(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(150), unique=True, nullable=False)
-    email = db.Column(db.String(150), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)
-
-    def set_password(self, password):
-        self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
-
-    def check_password(self, password):
-        return bcrypt.check_password_hash(self.password_hash, password)
-
 
 
 class Event(db.Model):
@@ -200,35 +189,36 @@ def login():
     if request.method == "POST":
         email_or_username = request.form.get("email_or_username", "").strip()
         password = request.form.get("password", "").strip()
-    
         user = None
 
-        if "@" in email_or_username:  # Check if input is an email or username
-            user = User.query.filter(User.email.ilike(email_or_username)).first()  #  Now filtering by email
+        # Check if input is an email or username
+        if "@" in email_or_username:  
+            user = User.query.filter(User.email.ilike(email_or_username.strip())).first()
         else:
-            user = User.query.filter(User.username.ilike(email_or_username)).first()  #  Filtering by username
+            user = User.query.filter(User.username.ilike(email_or_username.strip())).first()
 
-        if user:
-            if user.check_password(password):
-                login_user(user)
-                session['user_id'] = user.id
-                session['username'] = user.name  # Store name in session
-                session['role'] = user.role 
-                print("Session Data fter login: ", dict(session)) 
-                if user.role == "Admin":
-                    return redirect(url_for('dashboard'))
-                else:
-                    return redirect(url_for("home"))
+
+        if user and user.check_password(password):  
+            login_user(user)
+            session['user_id'] = user.id
+            session['username'] = user.name
+            session['role'] = user.role
+
+   
+
+            role = user.role.lower()
+            if role == 'super_admin':
+                return redirect(url_for('super_admin_dashboard'))
+            elif role == 'event_manager':
+                return redirect(url_for('event_manager_dashboard'))
+            elif role == "admin":
+                return redirect(url_for('admin_dashboard'))
             else:
-                flash("Invalid password!", "danger")
-        else:
-            flash("User not found!", "danger")
+                return redirect(url_for("home"))
 
-        return render_template("login.html")  # Keep input in case of error
+        flash("Invalid username/email or password!", "danger")
 
-    return render_template("login.html")
-
-
+    return render_template("login.html")  
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
@@ -236,60 +226,272 @@ def profile():
         flash("Please log in first!", "danger")
         return redirect(url_for('login'))
 
-    user = User.query.get(session['user_id'])
+    # 🔹 FIXED: Define user_id before using it
+    user_id = session['user_id']
 
-    if request.method == 'POST':
-        file = request.files.get('profile_picture')
-        if file:
-            print("Uploaded File Name:", file.filename)  # Debugging
+    conn = sqlite3.connect('app.db')
+    cursor = conn.cursor()
+
+    # 🔹 Fetch user details from the database
+    cursor.execute("SELECT name, username, email, phone, dob, gender, hobbies, bio, address, social_media, notifications, profile_picture FROM user WHERE id=?", (user_id,))
+    user = cursor.fetchone()
+
+    if not user:
+        flash("User not found!", "danger")
+        conn.close()
+        return redirect(url_for('login'))
+
+    user_data = {
+        # 'role': user[0] if user[0] else 'user',  # Default role
+        'name': user[0], 'username': user[1], 'email': user[2], 'phone': user[3],
+        'dob': user[4], 'gender': user[5], 'hobbies': user[6], 'bio': user[7],
+        'address': user[8], 'social_media': user[9], 'notifications': user[10],
+        'profile_picture': base64.b64encode(user[11]).decode('utf-8') if user[11] else None
+    }
+
+    if request.method == "POST":
+        name = request.form.get("name")
+        phone = request.form.get("phone")
+        dob = request.form.get("dob")
+        gender = request.form.get("gender")
+        hobbies = request.form.get("hobbies")
+        bio = request.form.get("bio")
+        address = request.form.get("address")
+        social_media = request.form.get("social_media")
+        notifications = 1 if request.form.get("notifications") else 0
+
+        # Handle Profile Picture Upload
+        file = request.files.get("profile_picture")
+        profile_pic_data = None
 
         if file and allowed_file(file.filename): 
             filename = secure_filename(file.filename)
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(file_path)  # Save the file to the specified folder
-            user.profile_picture = filename  # Store the filename in the user's profile
-            flash("Profile picture updated successfully!", "success")  # Correct flash message
-            #user.profile_picture = file.read()  # Store image as binary data in DB
-        else:
-            flash("Invalid file format! Only image files are allowed.", "danger")
-        user.name = request.form.get('name')
-        user.phone = request.form.get('phone')
-        user.dob = request.form.get('dob')
-        user.gender = request.form.get('gender')
-        user.hobbies = request.form.get('hobbies')
-        user.bio = request.form.get('bio')
-        user.address = request.form.get('address')
-        user.social_media = request.form.get('social_media')
-        user.notifications = request.form.get('notifications')
+            file_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+            file.save(file_path)
 
-        try:
-            db.session.commit()  # Save changes
-            flash("Profile updated successfully!", "success")
-        except Exception as e:
-            db.session.rollback()  # Undo changes if an error occurs
-            flash(f"Error updating profile: {str(e)}", "danger")
+            with open(file_path, "rb") as img_file:
+                profile_pic_data = img_file.read()
 
-        return redirect(url_for('profile'))  # Reload profile page
-    profile_picture = None
-    if user.profile_picture:
-        profile_picture = base64.b64encode(user.profile_picture).decode('utf-8')
+        # Update User Details
+        update_query = """
+            UPDATE user 
+            SET name=?, phone=?, dob=?, gender=?, hobbies=?, bio=?, address=?, social_media=?, notifications=?
+        """
+        values = [name, phone, dob, gender, hobbies, bio, address, social_media, notifications]
 
-    return render_template('profile.html', user=user, profile_picture=profile_picture)
+        # Add profile picture update only if a new picture is uploaded
+        if profile_pic_data:
+            update_query += ", profile_picture=?"
+            values.append(profile_pic_data)
+
+        update_query += " WHERE id=?"
+        values.append(user_id)
+
+        cursor.execute(update_query, tuple(values))
+        conn.commit()
+        conn.close()
+
+        flash("Profile updated successfully!", "success")
+        return redirect(url_for("profile"))
+
+    conn.close()
+    return render_template('profile.html', user=user_data)
+
+@app.route('/admin_profile/<int:user_id>', methods=['GET'])
+def admin_profile(user_id):
+    if 'user_id' not in session:
+        flash("Please log in first!", "danger")
+        return redirect(url_for('login'))
+
+    # Get the logged-in user's ID
+    logged_in_user_id = session['user_id']
+
+    conn = sqlite3.connect('app.db')
+    conn.row_factory = sqlite3.Row  # Allow dictionary-like access
+    cursor = conn.cursor()
+
+    # Fetch the logged-in user's role
+    cursor.execute("SELECT role FROM user WHERE id=?", (logged_in_user_id,))
+    logged_in_user = cursor.fetchone()
+
+    if not logged_in_user or logged_in_user['role'] != 'super_admin':
+        flash("You are not authorized to view this page!", "error")
+        conn.close()
+        return redirect(url_for('event_manager_dashboard'))
+
+    # Fetch admin/event manager details
+    cursor.execute("""
+        SELECT id, role, name, username, email, phone, dob, gender, hobbies, bio, 
+               address, social_media, notifications, profile_picture
+        FROM user WHERE id=?
+    """, (user_id,))
+    user = cursor.fetchone()
+
+    if not user:
+        flash("User not found!", "danger")
+        conn.close()
+        return redirect(url_for('super_admin_dashboard'))
+
+   
+    user_data = dict(user)  
+
+    # Encode profile picture if available
+    if user_data['profile_picture']:
+        user_data['profile_picture'] = base64.b64encode(user_data['profile_picture']).decode('utf-8')
+
+    conn.close()
+
+    # Render the `admin_profile.html` template with user data
+    return render_template('admin_profile.html', user=user_data)
 
 
-
-
-@app.route("/dashboard")
-def dashboard():
-    if "role" not in session or session["role"] != "Admin":
+#super admin dasboard 
+@app.route("/super_admin_dashboard")
+@login_required
+def super_admin_dashboard():
+    
+    if "role" not in session or session["role"] != "super_admin":
         flash("Access denied. Admins only.", "danger")
         return redirect(url_for("home"))
-
+ 
     # Fetch all events from the database
     event = Event.query.all()
+    admins = db.session.query(User).filter(User.role == 'admin').all()
+    event_managers = db.session.query(User).filter(User.role == 'event_manager').all()
 
-    return render_template("dashboard.html", event=event)
 
+    return render_template("super_admin_dashboard.html", event=event,admins=admins, event_managers=event_managers)
+
+#admin dashboard
+@app.route('/admin_dashboard')
+@login_required
+def admin_dashboard():
+    if 'user_id' not in session:
+        flash("Please log in first!", "danger")
+        return redirect(url_for('login'))
+
+    user_id = session['user_id']
+
+    conn = sqlite3.connect('app.db')
+    conn.row_factory = sqlite3.Row 
+    cursor = conn.cursor()
+
+    # Check if logged-in user is an Admin
+    cursor.execute("SELECT role FROM user WHERE id=?", (user_id,))
+    role = cursor.fetchone()
+
+    if not role or role[0] != 'admin':
+        flash("Unauthorized access!", "error")
+        conn.close()
+        return redirect(url_for('home'))
+
+    # Fetch Event Managers under this Admin
+    cursor.execute("SELECT id, name, email, phone FROM user WHERE role='event_manager'")
+    event_managers = cursor.fetchall()
+
+    # Fetch all Events (Admins manage all events)
+    cursor.execute("SELECT id, name, category, location, date FROM event")
+    event = cursor.fetchall()
+
+    conn.close()
+
+    return render_template('admin_dashboard.html', event_managers=event_managers, event=event)
+
+# #event manager dashboard
+# @app.route("/dashboard")
+# @login_required
+# def dashboard():
+#     if "role" not in session or session["role"] != "admin":
+#         flash("Access denied. Admins only.", "danger")
+#         return redirect(url_for("home"))
+
+#     # Fetch all events from the database
+#     event = Event.query.all()
+
+#     return render_template("dashboard.html", event=event)
+
+@app.route('/event_manager_dashboard')
+@login_required
+def event_manager_dashboard():
+    if current_user.role != 'event_manager':
+        flash("Access denied.", "danger")
+        return redirect(url_for('home'))
+    event = Event.query.all()
+    return render_template('dashboard.html', event=event) 
+
+@app.route('/add_admin', methods=['GET', 'POST'])
+@login_required
+def add_admin():
+    if current_user.role != 'super_admin':
+        flash("You are not authorized to perform this action!", "error")
+        return redirect(url_for('event_manager_dashboard'))
+
+    if request.method == 'POST':
+        name = request.form.get("name")
+        username=request.form.get("username")
+        phone = request.form.get("phone")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        dob = request.form.get("dob")
+        gender = request.form.get("gender")
+        hobbies = request.form.get("hobbies")
+        bio = request.form.get("bio")
+        address = request.form.get("address")
+        social_media = request.form.get("social_media")
+        notifications = 1 if request.form.get("notifications") else 0
+        
+       
+        role = request.form.get('role')
+       
+
+        # Check if email already exists
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            flash("An account with this email already exists!", "error")
+            return redirect(url_for('add_admin'))
+
+        if role not in ['admin', 'EventManager']:  # Only these roles can be added
+            flash("Invalid role selection!", "error")
+            return redirect(url_for('add_admin'))
+        # ✅ Hash password before storing
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+
+        # ✅ Create new admin
+        new_admin = User(name=name,username=username, email=email, phone=phone, role=role, password_hash=hashed_password,dob=dob,gender=gender,hobbies=hobbies,bio=bio,address=address,social_media=social_media,notifications=notifications)
+        db.session.add(new_admin)
+        db.session.commit()
+
+        flash(f"{role} {name} has been added successfully!", "success")
+        return redirect(url_for('super_admin_dashboard'))
+
+    return render_template('add_admin.html')
+
+@app.route('/delete_admin/<int:user_id>', methods=['POST'])
+@login_required
+def delete_admin(user_id):
+    # Ensure the current user is a Super Admin
+    if current_user.role != 'super_admin':
+        flash("You are not authorized to perform this action!", "error")
+        return redirect(url_for('event_manager_dashboard'))
+
+    user = User.query.get(user_id)
+
+    if not user:
+        flash("User not found!", "error")
+        return redirect(url_for('event_manager_dashboard'))
+
+    # Prevent deleting another Super Admin
+    if user.role == 'super_admin':
+        flash("You cannot delete another Super Admin!", "error")
+        return redirect(url_for('event_manager_dashboard'))
+
+    # Delete the user from the database
+    db.session.delete(user)
+    db.session.commit()
+    flash(f"Admin {user.name} has been deleted successfully!", "success")
+
+    return redirect(url_for('super_admin_dashboard'))
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -299,12 +501,13 @@ def submit():
     message = request.form.get('message')
 
     return render_template('thankyou.html')
+
 #edit event
 @app.route("/edit_event/<int:event_id>", methods=["GET", "POST"])
 def edit_event(event_id):
-    if "role" not in session or session["role"] != "Admin":
+    if "role" not in session or session["role"] not in ["admin", "super_admin", "event_manager"]:
         flash("Access denied!", "danger")
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("home"))
 
     event = Event.query.get(event_id)
 
@@ -318,16 +521,89 @@ def edit_event(event_id):
 
         db.session.commit()
         flash("Event updated successfully!", "success")
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("event"))
 
     return render_template("edit_event.html", event=event)
+
+@app.route("/edit_profile", methods=["GET", "POST"])
+def edit_profile():
+    if "user_id" not in session:
+        flash("Please log in first!", "danger")
+        return redirect(url_for("login"))
+
+    user_id = session["user_id"]
+    conn = sqlite3.connect("app.db")
+    cursor = conn.cursor()
+
+    # Fetch user details
+    cursor.execute("SELECT name, username, email, phone, dob, gender, hobbies, bio, address, social_media, notifications, profile_picture FROM user WHERE id=?", (user_id,))
+    user = cursor.fetchone()
+
+    if not user:
+        flash("User not found!", "danger")
+        conn.close()
+        return redirect(url_for("login"))
+
+    user_data = {
+        "name": user[0], "username": user[1], "email": user[2], "phone": user[3],
+        "dob": user[4], "gender": user[5], "hobbies": user[6], "bio": user[7],
+        "address": user[8], "social_media": user[9], "notifications": user[10],
+        "profile_picture": base64.b64encode(user[11]).decode("utf-8") if user[11] else None
+    }
+
+    if request.method == "POST":
+        name = request.form.get("name")
+        phone = request.form.get("phone")
+        dob = request.form.get("dob")
+        gender = request.form.get("gender")
+        hobbies = request.form.get("hobbies")
+        bio = request.form.get("bio")
+        address = request.form.get("address")
+        social_media = request.form.get("social_media")
+        notifications = request.form.get("notifications")
+
+        # Handle Profile Picture Upload
+        file = request.files.get("profile_picture")
+        new_profile_pic = None
+
+        if file and allowed_file(file.filename): 
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+            file.save(file_path)
+
+            with open(file_path, "rb") as img_file:
+                new_profile_pic = img_file.read()
+
+        # Update Query
+        update_query = """
+            UPDATE user 
+            SET name=?, phone=?, dob=?, gender=?, hobbies=?, bio=?, address=?, social_media=?, notifications=?
+        """
+        values = [name, phone, dob, gender, hobbies, bio, address, social_media, notifications]
+
+        if new_profile_pic:
+            update_query += ", profile_picture=?"
+            values.append(new_profile_pic)
+
+        update_query += " WHERE id=?"
+        values.append(user_id)
+
+        cursor.execute(update_query, tuple(values))
+        conn.commit()
+        conn.close()
+
+        flash("Profile updated successfully!", "success")
+        return redirect(url_for("profile"))
+
+    conn.close()
+    return render_template("edit_profile.html", user=user_data)
 
 # Delete Event
 @app.route("/delete_event/<int:event_id>", methods=["POST"])
 def delete_event(event_id):
-    if "role" not in session or session["role"] != "Admin":
+    if "role" not in session or session["role"] != "admin" or "super_admin" or "event_manager":
         flash("Access denied!", "danger")
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("event_manager_dashboard"))
 
     event = Event.query.get(event_id)
     if event:
@@ -337,7 +613,7 @@ def delete_event(event_id):
     else:
         flash("Event not found!", "danger")
 
-    return redirect(url_for("dashboard"))
+    return redirect(url_for("event_manager_dashboard"))
 
 @app.route('/photo')
 def photo():
@@ -391,9 +667,9 @@ def page_not_found(e):
 @app.route("/add_event", methods=["GET", "POST"])
 @login_required  
 def add_event():
-    if session.get("role") != "Admin":
+    if session.get("role") != "admin":
         flash("Access denied! Admins only.", "danger")
-        return redirect(url_for("dashboard"))  # Redirect normal users
+        return redirect(url_for("event_manager_dashboard"))  # Redirect normal users
 
     if request.method == "POST":
         name = request.form.get("name")
@@ -432,20 +708,26 @@ def add_event():
         db.session.add(new_event)
         db.session.commit()
         flash("Event added successfully!", "success")
-        return redirect(url_for("dashboard"))  # Redirect to dashboard
+        return redirect(url_for("event_manager_dashboard"))  # Redirect to dashboard
 
     return render_template("add_event.html")
 
 @app.route("/logout")
-@login_required
 def logout():
-    logout_user()
-    session.pop("username", None)  # Remove username from session
-    session.pop("user_id", None)
+    logout_user()  # Logs out the user from Flask-Login
+    session.clear()  # Clears all session data
+    flash("You have been logged out successfully.", "success")
     return redirect(url_for("index"))
+
+@app.errorhandler(403)
+def forbidden(e):
+    return render_template('error403.html'), 403
+
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('error500.html'), 500
 
 with app.app_context():
     db.create_all()
 if __name__ == '__main__':
-    
     app.run(debug=True,port=8080)

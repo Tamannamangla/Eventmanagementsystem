@@ -1,0 +1,139 @@
+/* Global Styles */
+body {
+    background-color: #F1F1F2;
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.container {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Headings */
+h1, h2, h3 {
+    text-align: center;
+    color: #1995AD;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 30px;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary {
+    background-color: #1995AD;
+    color: white;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #d9534f;
+    color: white;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: #A1D6E2;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 2px solid #1995AD;
+}
+
+.table th {
+    background-color: #1995AD;
+    color: #F1F1F2;
+    font-size: 1.2rem;
+}
+
+.table tr:hover {
+    background-color: rgba(25, 149, 173, 0.2);
+    transition: background 0.3s;
+}
+
+/* Form Buttons */
+form button {
+    border: none;
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+form button:hover {
+    opacity: 0.8;
+}
+
+/* Animated Fade-In Effect */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scroll Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-in-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

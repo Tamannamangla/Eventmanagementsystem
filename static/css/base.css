@@ -54,99 +54,90 @@
     align-items: center;
     gap: 5px;
 }
+.pa{
+    color: black;
+}
 
 
-/* 🌟 Footer */
+/* Footer Section */
+
 footer {
+    background-color: #13768a;
     color: white;
-    text-align: center;
-    padding: 30px 20px;
-    width: 100%;
-    background: url('https://eventsmanagementkerala.com/wp-content/uploads/2023/10/Event-management-in-Kerala.webp') no-repeat center center / cover;
-    position: relative;
-    margin-top: 50px;
+    padding: 40px 60px;
+    font-family: Arial, sans-serif;
 }
 
-.footer-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
-}
-
-.footer-content {
-    position: relative;
-    z-index: 2;
-}
-
-.footer-container {
+/* Top Section */
+.footer-top {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid #4A5B65;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
 }
 
-.footer-section {
-    flex: 1;
-    max-width: 200px;
+.footer-logo h1 {
+    font-size: 50px;
+    font-weight: bold;
 }
 
-.footer-section h4 {
-    font-size: 24px;
-    text-transform: uppercase;
+.footer-description {
+    width: 50%;
+    font-size: 14px;
+    line-height: 1.6;
 }
 
-.footer-section ul {
+.footer-contact p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.footer-contact a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-contact a:hover {
+    text-decoration: underline;
+}
+
+/* Bottom Section */
+.footer-bottom {
+ 
+    padding: 30px 0;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.footer-column h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.footer-column ul {
     list-style: none;
     padding: 0;
 }
 
-.footer-section ul li {
-    margin-bottom: 10px;
-    font-size: 16px;
+.footer-column ul li {
+    margin-bottom: 8px;
 }
 
-.footer-section ul li a {
+.footer-column ul li a {
     color: white;
     text-decoration: none;
-    transition: color 0.3s ease;
+    font-size: 14px;
 }
 
-.footer-section ul li a:hover {
+.footer-column ul li a:hover {
     text-decoration: underline;
-    color: #ff9800;
 }
-
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.social-icons a {
-    color: white;
-    font-size: 20px;
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.social-icons a:hover {
-    color: #ff9800;
-    transform: scale(1.2);
-}
-
-/* 🌟 Responsive Design */
-@media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .footer-section {
-        max-width: 100%;
-        text-align: center;
-    }
+.footer-logo{
+    border-radius: 10%;
 }

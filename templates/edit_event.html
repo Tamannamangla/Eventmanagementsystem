@@ -21,8 +21,14 @@
             <input type="text" class="form-control" name="name" value="{{ event.name }}" required>
         </div>
         <div class="mb-3">
-            <label for="category" class="form-label">Category</label>
-            <input type="text" class="form-control" name="category" value="{{ event.category }}" required>
+            <label class="form-label">Category</label>
+            <select name="category" id="category" class="form-control">
+                <option value="ceremony">Ceremony</option>
+                <option value="birthday">Birthday</option>
+                <option value="anniversary">Anniversary</option>
+                <option value="wedding">Wedding</option>
+                <option value="baby-shower">Baby Shower</option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="location" class="form-label">Location</label>

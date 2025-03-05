@@ -23,13 +23,21 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <i class="fas fa-bars"></i>
             </button>
-          
+
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                    {% if 'role' in session and session['role'] == 'Admin' %}
-                    <li><a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                        {% if 'role' in session and session['role'] == 'super_admin' %}
+                    <li><a class="nav-link" href="{{ url_for('super_admin_dashboard') }}">Main Dashboard</a></li>
+                    {% endif %}</li>
+                    <li class="nav-item">
+                        {% if 'role' in session and session['role'] == 'event_manager' %}
+                    <li><a class="nav-link" href="{{ url_for('event_manager_dashboard') }}">Manager Dashboard</a></li>
+                    {% endif %}</li>
+                    <li class="nav-item">
+                        {% if 'role' in session and session['role'] == 'admin' %}
+                    <li><a class="nav-link" href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></li>
                     {% endif %}</li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{url_for('event')}}"><i class="fa-solid fa-calendar-days me-1"></i>
@@ -69,91 +77,100 @@
         {% endblock %}
     </div>
 
-    <!-- 🌟 Footer -->
-    <footer>
-        <div class="footer-overlay"></div>
-        <div class="footer-content">
-            <h4>EventHive</h4>
-            <p>Your one-stop destination for discovering and booking amazing events.</p>
-            <div class="footer-container">
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="{{url_for('home')}}">Home</a></li>
-                        <li><a href="{{url_for('aboutus')}}">About Us</a></li>
-                        <li><a href="{{url_for('feedback')}}">FeedBack</a></li>
-                        <li><a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
-                        </li>
-                    </ul>
-                </div>
+   
+  <!--  Footer Section -->
+    
+  <footer class="footer">
+    <div class="footer-top">
+        <div class="footer-logo">
+            <img src="../static/images/logo1.png" class="footer-logo" alt="No"
+                height="210px" width="200px">
+        </div>
+        <div class="footer-description">
+            <p>
+                EventHive is your one-stop destination for seamless event planning. Whether it's a birthday,
+                wedding, corporate gathering, or any special occasion, we bring your vision to life with precision
+                and creativity.
+<br>
+                With a passionate team of event professionals, we handle everything from venue selection and décor
+                to entertainment and catering, ensuring a stress-free and memorable experience. 
+<br>
+                At EventHive, we believe that every event tells a story, and we are here to make yours
+                extraordinary. Let us take care of the details while you enjoy the moments that truly matter!
+
+            </p>
+        </div>
+        <div class="footer-contact">
+            <p><strong>Phone:</strong> +91 8168428500</p>
+            <p><strong>Fax:</strong> +1 916-875-2235</p>
+            <p><strong>Email:</strong> manglastamanna@gmail.com</p>
+            <p><strong>Website:</strong> <a href="index.html">www.EventHive.com</a></p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="footer-links">
+            <div class="footer-column">
+                <h3>OUR SERVICES</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="{{url_for('aboutus')}}">About Us</a></li>
+                    <li><a href="#why-choose-us">Services</a></li>
+                    <li><a href="#why-choose-us">Features</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>QUICK LINK</h3>
+                <ul>
+                    <li><a href="#">Knowledge Base</a></li>
+                    <li><a href="#">Hire An Expert</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>RESOURCES</h3>
+                <ul>
+                    <li><a href="#">Knowledge Base</a></li>
+                    <li><a href="#">Hire An Expert</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>IMPORTANT LINK</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Condition</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let elements = document.querySelectorAll(".fade-in");
+
+        function checkScroll() {
+            let windowHeight = window.innerHeight;
+            elements.forEach(element => {
+                let position = element.getBoundingClientRect().top;
+                if (position < windowHeight - 50) {
+                    element.classList.add("visible");
+                }
+            });
+        }
+
+        window.addEventListener("scroll", checkScroll);
+        checkScroll(); // Run initially
+    });
+</script>
 
     <!-- Bootstrap Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-
-        // Handle logout confirmation and redirection
-        document.getElementById('logoutButton').addEventListener('click', function (event) {
-            event.preventDefault(); // Prevent default link behavior
-
-            // Show confirmation pop-up
-            if (confirm("Are you sure you want to log out?")) {
-                // If user clicks "Yes", proceed with logout
-                fetch("{{ url_for('logout') }}", {
-                    method: 'GET',
-                }).then(response => {
-                    if (response.ok) {
-                        alert("Logged out successfully!"); // Show success pop-up
-                        setTimeout(function () {
-                            window.location.href = "{{ url_for('index') }}"; // Redirect to index page after 5 seconds
-                        }, 5000); // 5 seconds delay
-                    }
-                });
-            }
-        });
-
-        const eventSearchInput = document.getElementById('event-search');
-        const locationSearchInput = document.getElementById('location-search');
-
-        eventSearchInput.addEventListener('input', function () {
-            performSearch(eventSearchInput.value, locationSearchInput.value);
-        });
-
-        locationSearchInput.addEventListener('input', function () {
-            performSearch(eventSearchInput.value, locationSearchInput.value);
-        });
-
-        function performSearch(eventQuery, locationQuery) {
-            fetch(`/search?event=${eventQuery}&location=${locationQuery}`)
-                .then(response => response.json())
-                .then(data => {
-                    // Show search results dynamically
-                    let resultsHTML = '';
-                    if (data.events.length || data.locations.length) {
-                        if (data.events.length) {
-                            resultsHTML += '<h3>Events</h3><ul>';
-                            data.events.forEach(event => {
-                                resultsHTML += `<li>${event.name} - ${event.location}</li>`;
-                            });
-                            resultsHTML += '</ul>';
-                        }
-                        if (data.locations.length) {
-                            resultsHTML += '<h3>Locations</h3><ul>';
-                            data.locations.forEach(location => {
-                                resultsHTML += `<li>${location.name}</li>`;
-                            });
-                            resultsHTML += '</ul>';
-                        }
-                    } else {
-                        resultsHTML = '<p>No results found</p>';
-                    }
-                    document.getElementById('search-results').innerHTML = resultsHTML;
-                })
-                .catch(error => console.error('Error performing search:', error));
-        }
-    </script>
+    <script src="{{ url_for('static', filename='css/base.js') }}"></script>
 </body>
 
 </html>

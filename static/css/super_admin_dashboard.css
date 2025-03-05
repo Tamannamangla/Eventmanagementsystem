@@ -1,0 +1,118 @@
+/* Apply smooth scrolling */
+html {
+    scroll-behavior: smooth;
+    background-color: #F1F1F2;
+    font-family: "Arial", sans-serif;
+}
+
+/* Animated header */
+h2 {
+    text-align: center;
+    color: #1995AD;
+    font-size: 2.5rem;
+    margin-top: 5%;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Table Styling */
+.table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: #A1D6E2;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 2px solid #1995AD;
+}
+
+.table th {
+    background-color: #1995AD;
+    color: #F1F1F2;
+    font-size: 1.2rem;
+}
+
+.table tr:hover {
+    background-color: rgba(25, 149, 173, 0.2);
+    transition: background 0.3s;
+}
+
+/* Buttons */
+button {
+    background-color: #1995AD;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #A1D6E2;
+    color: #1995AD;
+    transform: scale(1.05);
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: #1995AD;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #A1D6E2;
+}
+
+/* Form Buttons */
+form button {
+    background-color: #d9534f;
+}
+
+form button:hover {
+    background-color: #c9302c;
+}
+
+/* Images */
+img {
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+
+/* Animated Fade-In Effect */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scroll Effects */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-in-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

@@ -53,15 +53,7 @@
         {% endwith %}
     </form>
 
-    <script>
-        // Function to remove flash messages after 5 seconds
-        setTimeout(function() {
-            let flashMessages = document.querySelectorAll('.success');
-            flashMessages.forEach(function(message) {
-                message.remove();
-            });
-        }, 5000); // 5000 milliseconds = 5 seconds
-    </script>
+   <script src="{{ url_for('static', filename='css/feedback.js') }}"></script>
 
         {% endblock %}
 

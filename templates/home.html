@@ -22,7 +22,7 @@
 
     <section class="hero1">
         <div class="hero-content1">
-            <ul class="">
+            <ul class="fr">
                 {% if session['username'] %}
                 <h1>Welcome {{ session['username'] }}</h1>
 
@@ -100,7 +100,7 @@
 
     <section class="testimonials">
         <h2>What Our Clients Say</h2>
-        <div id="testimonialCarousel" class="event-carousel slide" data-bs-ride="carousel">
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <!-- Slide 1 -->
                 <div class="carousel-item active">
@@ -120,14 +120,14 @@
                             <p>⭐ ⭐ ⭐ ⭐ ⭐ "Best event management service!"</p>
                             <p>- Michael Smith</p>
                         </div>
-                    </div>
+                    </div> 
                 </div>
                 <!-- Slide 2 -->
                 <div class="carousel-item">
                     <div class="d-flex justify-content-center gap-4">
                         <div class="testimonial-card">
                             <img src="../static/images/client4.jpg" alt="Client Avatar" class="testimonial-avatar">
-                            <p>⭐ ⭐ ⭐ ⭐ ⭐ "Highly professional and well-organized!"</p>
+                            <p>⭐ ⭐ ⭐ ⭐ ⭐ "Highly professional"</p>
                             <p>- Emily Brown</p>
                         </div>
                         <div class="testimonial-card">
@@ -142,16 +142,18 @@
                         </div>
                     </div>
                 </div>
+              
             </div>
-            <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" ></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" ></span>
-            </button>
+              <!-- Carousel Controls -->
+              <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+          </button>
+
         </div>
     </section>
 
@@ -339,7 +341,7 @@
                 </div>
             </div>
 
-            <!-- <div class="accordion-item">
+            <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q5">
                         Are group discounts available?
@@ -349,8 +351,8 @@
                     <div class="accordion-body">Yes, we offer special discounts for group bookings. Contact us for more
                         details.</div>
                 </div>
-            </div> -->
-<!-- 
+            </div>
+            
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q6">
@@ -361,8 +363,8 @@
                     <div class="accordion-body">Yes, you can modify attendee details through your account dashboard
                         before the event starts.</div>
                 </div>
-            </div> -->
-<!-- 
+            </div>
+            
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q7">
@@ -373,7 +375,7 @@
                     <div class="accordion-body">Our website will show a "Sold Out" label on events that are no longer
                         available for booking.</div>
                 </div>
-            </div> -->
+            </div>
 
             <div class="accordion-item">
                 <h2 class="accordion-header">
@@ -417,7 +419,8 @@
                             <textarea class="form-control" name="message" rows="4" placeholder="Message"
                                 required></textarea>
                         </div>
-                        <button type="submit" id="sendMessageBtn" class="btn btn-primary">  Send Message  <i class="fas fa-paper-plane"></i></button>
+                        <button type="submit" id="sendMessageBtn" class="btn btn-primary"> Send Message <i
+                                class="fas fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>

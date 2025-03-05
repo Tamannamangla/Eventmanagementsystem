@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* Page Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #A1D6E2, #1995AD);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Smooth Fade-in Animation */
+        .edit-form {
+            max-width: 500px;
+            width: 90%;
+            background: #fff;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeIn 1s forwards;
+        }
+
+        /* Form Header */
+        .edit-form h2 {
+            color: #1995AD;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Input Fields */
+        .edit-form input,
+        .edit-form textarea {
+            width: calc(100% - 24px); /* Prevents overflow */
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: 0.3s;
+            display: block; /* Ensures proper alignment */
+        }
+
+        .edit-form input:focus,
+        .edit-form textarea:focus {
+            border-color: #1995AD;
+            box-shadow: 0 0 10px rgba(25, 149, 173, 0.2);
+            outline: none;
+        }
+
+        /* Save Button */
+        .save-btn {
+            width: 100%;
+            padding: 12px;
+            background: #1995AD;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            margin-top: 10px;
+        }
+
+        .save-btn:hover {
+            background: #137A88;
+            box-shadow: 0 5px 15px rgba(25, 149, 173, 0.4);
+        }
+
+        /* Checkbox Styling */
+        /* Checkbox Container */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Checkbox Input */
+.checkbox-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #1995AD; /* Changes color when checked */
+    margin-right: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* Checkbox Hover Effect */
+.checkbox-container input[type="checkbox"]:hover {
+    transform: scale(1.1);
+}
+
+/* Checkbox Label */
+.checkbox-container label {
+    cursor: pointer;
+}
+
+
+        /* Keyframe Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .edit-form {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+        i{
+            margin-left: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="edit-form">
+        <a href="{{ url_for('profile') }}"> <i class="fa-solid fa-xmark fa-lg" style="color: #cc1e1e;"></i></a>
+
+        <h2>Edit Profile</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" value="{{ user.name }}" placeholder="Full Name" required>
+            <input type="text" name="username" value="{{ user.username }}" placeholder="Username" required>
+            <input type="email" name="email" value="{{ user.email }}" placeholder="Email" required>
+            <input type="text" name="phone" value="{{ user.phone }}" placeholder="Phone">
+            <input type="date" name="dob" value="{{ user.dob }}">
+            <input type="text" name="gender" value="{{ user.gender }}" placeholder="Gender">
+            <input type="text" name="hobbies" value="{{ user.hobbies }}" placeholder="Hobbies">
+            <input type="text" name="bio" value="{{ user.bio }}" placeholder="Short Bio">
+            <input type="text" name="address" value="{{ user.address }}" placeholder="Address">
+            <input type="text" name="social_media" value="{{ user.social_media }}" placeholder="Social Media Links">
+            
+            <!-- Notifications Checkbox -->
+            <div class="checkbox-container">
+                <input type="checkbox" name="notifications" {% if user.notifications %} checked {% endif %}>
+                <label for="notifications">Enable Notifications</label>
+            </div>
+
+            <label>Profile Picture:</label>
+            <input type="file" name="profile_picture">
+        
+            {% if user.profile_picture %}
+            <img src="data:image/png;base64,{{ user.profile_picture }}" alt="Profile Picture" width="100">
+            {% endif %}
+            <button type="submit" class="save-btn">Save Changes</button>
+        </form>
+    </div>
+
+</body>
+</html>

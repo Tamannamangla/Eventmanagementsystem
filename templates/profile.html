@@ -4,103 +4,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <title>EventHive ID Card</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #A1D6E2;
+            /* Soft grayish-blue background */
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+            /* Initially hidden for animation */
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #1995AD;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 10px;
+            box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+        }
+
+
+        .sidebar ul li {
+            padding: 20px 5px;
+            width: 100%;
+            text-align: center;
+            transition: 0.3s ease-in-out;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            display: block;
+            width: 100%;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #2993c1ba;
+            /* Darker hover effect */
+        }
+
+        /* Main Content */
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .id-card {
+            display: flex;
+            align-items: center;
+            background: white;
+            width: 800px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border: 10px solid #1995AD;
+        }
+
+        /* Profile Image */
+        .profile-pic-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-pic {
+            width: 180px;
+            height: 220px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        /* Details Section */
+        .details {
+            flex: 2;
+            padding-left: 30px;
+            color: #333;
+        }
+
+        .details h2 {
+            color: #1995AD;
+            margin-bottom: 10px;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        /* Grid Layout for Details */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px 30px;
+            /* Row gap & column gap */
+        }
+
+        .details p {
+            font-size: 16px;
+            font-weight: 500;
+            padding: 5px 0;
+        }
+
+        /* Edit Button */
+        .edit-button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #1995AD;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .edit-button:hover {
+            background-color: #137A88;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                padding: 10px;
+            }
+
+            .id-card {
+                flex-direction: column;
+                width: 95%;
+                text-align: center;
+            }
+
+            .profile-pic-container {
+                margin-bottom: 15px;
+            }
+
+            .profile-pic {
+                width: 150px;
+                height: 180px;
+            }
+
+            .details {
+                padding-left: 0;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+        
+    </style>
 </head>
 
 <body>
-    {% extends 'base.html' %}
 
-    {% block content %}
-    <br><br>
-    <div class="profile-container">
-        <!-- <h2 class="text-center">User Profile</h2>
-        <div class="text-center">
-            <img src="{{ user.profile_picture or '../static/images/default-profile.png' }}" alt="Profile Picture" class="profile-pic">
-            <input type="file" class="form-control mt-2" name="profile_picture" accept="image/*">
-        </div> -->
-        <h2 class="text-center">User Profile</h2>
-        <div class="text-center">
-            {% if profile_picture %}
-                <img src="data:image/jpeg;base64,{{ profile_picture }}" alt="Profile Picture" class="profile-pic">
-            {% else %}
-                <img src="{{ url_for('static', filename='images/client4.jpg') }}" alt="Profile Picture" class="profile-pic">
-            {% endif %}
-            <input type="file" class="form-control mt-2" name="profile_picture" accept="image/*">
-        </div>
-        
-
-        <form method="POST">
-            <div class="mb-3">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-control" name="name" value="{{ user.name or '' }}" required>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Username</label>
-                <input type="text" class="form-control" name="username" value="{{ user.username }}" disabled>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" value="{{ user.email }}" disabled>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Phone Number</label>
-                <input type="tel" class="form-control" name="phone" value="{{ user.phone or '' }}">
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Date of Birth</label>
-                <input type="date" class="form-control" name="dob" value="{{ user.dob or '' }}">
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Gender</label>
-                <select class="form-select" name="gender">
-                    <option value="Male" {% if user.gender == "Male" %}selected{% endif %}>Male</option>
-                    <option value="Female" {% if user.gender == "Female" %}selected{% endif %}>Female</option>
-                    <option value="Other" {% if user.gender == "Other" %}selected{% endif %}>Other</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Hobbies</label>
-                <input type="text" class="form-control" name="hobbies" value="{{ user.hobbies or '' }}" placeholder="e.g. Reading, Coding, Chess">
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Bio</label>
-                <textarea class="form-control" name="bio" rows="3" placeholder="Write something about yourself...">{{ user.bio or '' }}</textarea>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Address</label>
-                <input type="text" class="form-control" name="address" value="{{ user.address or '' }}" placeholder="City, State, Country">
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Social Media</label>
-                <input type="text" class="form-control" name="social_media" value="{{ user.social_media or '' }}" placeholder="LinkedIn Profile URL">
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Notification Preferences</label>
-                <select class="form-select" name="notifications">
-                    <option value="Email & SMS" {% if user.notifications == "Email & SMS" %}selected{% endif %}>Email & SMS</option>
-                    <option value="Email Only" {% if user.notifications == "Email Only" %}selected{% endif %}>Email Only</option>
-                    <option value="SMS Only" {% if user.notifications == "SMS Only" %}selected{% endif %}>SMS Only</option>
-                    <option value="None" {% if user.notifications == "None" %}selected{% endif %}>None</option>
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-save w-100">Save Changes</button>
-        </form>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>EventHive</h2>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('edit_profile') }}">Settings</a></li>
+            <li><a href="{{ url_for('home') }}">Notifications</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            <li class="nav-item">
+                {% if 'role' in session and session['role'] == 'super_admin' %}
+            <li><a class="nav-link" href="{{ url_for('super_admin_dashboard') }}">Main Dashboard</a></li>
+            {% endif %}</li>
+            <li class="nav-item">
+                {% if 'role' in session and session['role'] == 'event_manager' %}
+            <li><a class="nav-link" href="{{ url_for('event_manager_dashboard') }}">Manager Dashboard</a></li>
+            {% endif %}</li>
+            <li class="nav-item">
+                {% if 'role' in session and session['role'] == 'admin' %}
+            <li><a class="nav-link" href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></li>
+            {% endif %}</li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url_for('event')}}"><i class="fa-solid fa-calendar-days me-1"></i>
+                    Events
+                </a>
+            </li>
+        </ul>
     </div>
-    {% endblock %}
+
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="id-card">
+
+            <!-- Profile Picture -->
+            <div class="profile-pic-container">
+                {% if user.profile_picture %}
+                <img src="data:image/png;base64,{{ user.profile_picture }}" alt="Profile Picture" class="profile-pic">
+                {% else %}
+                <img src="{{ url_for('static', filename='images/default-profile.png') }}" alt="Profile Picture"
+                    class="profile-pic">
+                {% endif %}
+            </div>
+
+            <!-- Details Section -->
+            <div class="details">
+                <h2><span style="font-size: 55px; font-weight: bold;">{{ user.name }}</span></h2>
+                <div class="details-grid">
+                    <p><strong>Username:</strong> {{ user.username }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Phone:</strong> {{ user.phone }}</p>
+                    <p><strong>Date of Birth:</strong> {{ user.dob }}</p>
+                    <p><strong>Gender:</strong> {{ user.gender }}</p>
+                    <p><strong>Hobbies:</strong> {{ user.hobbies }}</p>
+                    <p><strong>Bio:</strong> {{ user.bio }}</p>
+                    <p><strong>Address:</strong> {{ user.address }}</p>
+                    <p><strong>Social Media:</strong> {{ user.social_media }}</p>
+                    <p><strong>Notifications:</strong> {% if user.notifications %} Enabled {% else %} Disabled {% endif
+                        %}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Button (Outside ID Card) -->
+
+        <a href="{{ url_for('edit_profile') }}"><button class="edit-button">Edit Profile</button></a>
+
+    </div>
 
 </body>
 

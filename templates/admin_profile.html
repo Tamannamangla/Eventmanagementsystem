@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile - {{ user.name }}</title>
+</head>
+<body>
+    <h1>Admin Profile</h1>
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Phone:</strong> {{ user.phone }}</p>
+    <p><strong>Role:</strong> {{ user.role }}</p>
+
+    
+    <!-- Additional User Details -->
+    <p><strong>Gender:</strong> {{ user.gender }}</p>
+    <p><strong>Date of Birth:</strong> {{ user.dob }}</p>
+    <p><strong>Hobbies:</strong> {{ user.hobbies }}</p>
+    <p><strong>Bio:</strong> {{ user.bio }}</p>
+    <p><strong>Address:</strong> {{ user.address }}</p>
+    
+    <!-- Social Media Links -->
+   
+    
+            <p><strong>Social Media</strong>{{user.social_media}}</p>
+        
+    
+    <!-- Back to Dashboard Link -->
+    <a href="{{ url_for('event_manager_dashboard') }}">Back to Dashboard</a>
+</body>
+</html>
