@@ -397,19 +397,6 @@ def admin_dashboard():
 
     return render_template('admin_dashboard.html', event_managers=event_managers, event=event)
 
-# #event manager dashboard
-# @app.route("/dashboard")
-# @login_required
-# def dashboard():
-#     if "role" not in session or session["role"] != "admin":
-#         flash("Access denied. Admins only.", "danger")
-#         return redirect(url_for("home"))
-
-#     # Fetch all events from the database
-#     event = Event.query.all()
-
-#     return render_template("dashboard.html", event=event)
-
 @app.route('/event_manager_dashboard')
 @login_required
 def event_manager_dashboard():
